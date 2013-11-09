@@ -10,6 +10,7 @@
     "ejs": "*",
     "mysql": "~2.0.0-alpha9",
     "mongo": "*",
-    "ejs-locals": "~1.0.2"
+    "ejs-locals": "~1.0.2",
+    "cheerio": "~0.12.3"
   }
 }

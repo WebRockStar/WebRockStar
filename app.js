@@ -9,7 +9,12 @@ var express = require('express')
   , candidate = require('./routes/candidate')
   , http = require('http')
   , path = require('path');
+//  , Parse =  require('kaiseki');
 
+//var PARSE_APP_ID = 'J5v0o2xUAaXvxziD26kzLauhmu6oajOKCmnwUMMw'
+//  , PARSE_REST_API_KEY='rKw6N9vy6KnlHx9lw6slxgxKcpAFqsvFJmPYl1Cc';
+
+//var parse = new Parse(PARSE_APP_ID,PARSE_REST_API_KEY);
 var app = express();
 
 // use ejs-locals for all ejs templates:
@@ -36,7 +41,10 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/login', candidate.login);
-app.get('/test', candidate.test);
+app.get('/test', candidate.login,candidate.test);
+app.post('/test',candidate.login,candidate.testfunc);
+
+//Configure application for parse
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

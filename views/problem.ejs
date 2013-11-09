@@ -10,7 +10,7 @@
   	<%
   	var printFile = function(fl){
   		%>
-  		<li data-wrs-mime="<%= fl.mime %>" data-wrs-content="<%= fl.contents %>" data-wrs-editable="<%= fl.editable %>" >
+  		<li id="<%= fl.objid%>" data-wrs-mime="<%= fl.mime %>" data-wrs-content="<%= fl.contents %>" data-wrs-editable="<%= fl.editable %>" >
   			<%= fl.name %>
   		</li><%
   	}; 
@@ -18,7 +18,7 @@
   		%><ul><%
   		fl.forEach(function(v,i){
   			if(v.type == 'folder'){
-  				%><li><%= fileList[f].name %></li><li><% 
+  				%><li><%= v.name %></li><li><% 
   				printFolder(v.children);
   				%></li><%
   			}else{
@@ -48,10 +48,5 @@
 	  	 <button type="button" class="btn btn-success submit-btn">Submit</button>
   	 </div>
   	</div>
-      <footer>
-        <p>&copy; Company 2013</p>
-      </footer> <!-- /container -->
-
-
     <script src="/js/codemirror.min.js"></script>
     <script src="/js/candidate.js"></script>

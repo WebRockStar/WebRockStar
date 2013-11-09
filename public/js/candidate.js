@@ -35,5 +35,16 @@ $('li[data-wrs-mime]').on('click', function() {
 		savebtns.disabled = true;
 });
 $('button.test-btn').on('click', function(e) {
-	//depoy the code but doesno't update the code in db.
+	//deploy the code but doesno't update the code in db.
+	//get the data and send it to the backend
+	$.ajax({
+		action:'.',
+		type:'POST',
+		data: {
+			flist: $('#fileList').html()
+			},
+		success: function(d){
+			console.log(d);		
+		}
+	});
 });
