@@ -6,6 +6,8 @@
 var ce = $('#codeEditor')[0];
 CodeMirror.defaults.lineNumbers = true;
 var wrsCE = CodeMirror.fromTextArea(ce);
+// Setting default options:
+wrsCE.setOption('lineWrapping',true);
 var savebtns = $('button.update-btn')[0];
 wrsCE.on('change', function(e) {
 	//change the status of
@@ -33,5 +35,5 @@ $('li[data-wrs-mime]').on('click', function() {
 		savebtns.disabled = true;
 });
 $('button.test-btn').on('click', function(e) {
-
+	//depoy the code but doesno't update the code in db.
 });

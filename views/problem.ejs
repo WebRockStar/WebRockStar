@@ -1,4 +1,6 @@
 <% layout('layout') -%>
+
+	<link href="/css/codemirror.css" rel="stylesheet">
   	
   	<div id='problemDesc'>
   		<%= probDesc %>
@@ -8,7 +10,7 @@
   	<%
   	var printFile = function(fl){
   		%>
-  		<li data-wrs-mime=<%= fl.mime %> data-wrs-content="<%= fl.contents %>" data-wrs-editable="<%= fl.editable %>" >
+  		<li data-wrs-mime="<%= fl.mime %>" data-wrs-content="<%= fl.contents %>" data-wrs-editable="<%= fl.editable %>" >
   			<%= fl.name %>
   		</li><%
   	}; 
