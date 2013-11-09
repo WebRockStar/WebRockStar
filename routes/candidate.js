@@ -1,4 +1,5 @@
-var os = require('os'), fs = require('fs'), cheerio = require('cheerio');
+var os = require('os'), fs = require('fs'), cheerio = require('cheerio'), exec = require('child_process').exec;
+
 exports.login = function(req, res, next) {
 	//verify sessions//
 
@@ -13,6 +14,14 @@ exports.login = function(req, res, next) {
 	}
 	// next();
 };
+
+var problemDescription = "Implement authentication module \
+<br> <strong>Constraints </strong>: a form to register users ,\
+ a form containing user performance \
+ Company will provide test case sin the format of input and expected output\
+ for eg in case of login we have two steps \
+ create a registration form so will provide all various types of combinations of email addresses\
+ and expected output as http error codes/ specific error in a divtag";
 
 var template = [{
 	objid : '1',
@@ -50,7 +59,19 @@ var template = [{
 	name : 'package.json',
 	type : 'file', //can be folder/file
 	mime : 'javascript',
-	contents : '{name:"WebRockStar",version:"0.0.1","private":true,scripts:{start:"node app.js"},dependencies:{express:"3.3.4",ejs:"*",mysql:"~2.0.0-alpha9"}}',
+	contents : '{\
+    "name": "WebRockStar",\
+    "version": "0.0.1",\
+    "private": true,\
+    "scripts": {\
+        "start": "node app.js"\
+    },\
+    "dependencies": {\
+        "express": "3.3.4",\
+        "ejs": "*",\
+        "mysql": "~2.0.0-alpha9"\
+    }\
+}',
 	editable : 'false'
 }];
 exports.test = function(req, res) {
@@ -63,19 +84,20 @@ exports.test = function(req, res) {
 };
 
 exports.testfunc = function(req, res, next) {
-	var tmpPrefix = os.tmpDir() + '/wrs-' + Date.now();
+	var tmpId = 'wrs-' + Date.now();
+	var tmpPrefix = os.tmpDir() + '/' + tmpId;
 	// var cwd = process.cwd();
 	fs.mkdirSync(tmpPrefix);
 	// fs.writeFileSync(filename, data
 
 	console.log("Create" + tmpPrefix + " and cd into it");
-	$= cheerio.load(req.body.flist);
-	
+	$ = cheerio.load(req.body.flist);
+
 	var createFiles = function(ft, pt) {
 		console.log(ft.editable);
 		if (ft.editable == 'true') {
 			console.log("fetch the updated data for " + pt + '/' + ft.name + " " + ft.objid);
-			fs.writeFileSync(pt + '/' + ft.name, $('li#'+ft.objid).attr('data-wrs-content'));
+			fs.writeFileSync(pt + '/' + ft.name, $('li#' + ft.objid).attr('data-wrs-content'));
 		} else {
 			console.log("create file " + pt + '/' + ft.name);
 			fs.writeFileSync(pt + '/' + ft.name, ft.contents);
@@ -106,7 +128,21 @@ exports.testfunc = function(req, res, next) {
 			createFiles(template[f], relPath);
 		}
 	}
-	//create folder structure
-	// process.chdir(cwd);
+	//send the request, this is to prevent network timeout for long operations.
+	//start node js installation and than change current directory back to original
+	//have to create a csv based tes
+	//make the application ready
+	exec('./getLocalPort.py '+tmpId,function (error, stdout, stderr) {
+		if(!!error || stderr){
+			console.log("Error",error);
+			//update the result in db as there wull be one script which will be checking 
+			//wether the process was complete and also evaluating accordingly
+		}
+		//Kick off selenium scripts here.
+	});
+	//fetch all the test cases according to the function and test it.
+	res.render('testing', {
+		"success" : tmpId
+	});
 };
 // example.submit

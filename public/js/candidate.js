@@ -37,6 +37,10 @@ $('li[data-wrs-mime]').on('click', function() {
 $('button.test-btn').on('click', function(e) {
 	//deploy the code but doesno't update the code in db.
 	//get the data and send it to the backend
+	savebtns.click();
+	var verifyTestCases = function(testId){
+		
+	};
 	$.ajax({
 		action:'.',
 		type:'POST',
@@ -44,7 +48,9 @@ $('button.test-btn').on('click', function(e) {
 			flist: $('#fileList').html()
 			},
 		success: function(d){
-			console.log(d);		
+			console.log(d);
+			//send another request to check if the code is tested;
+			// verify if the code is tested				
 		}
 	});
 });
