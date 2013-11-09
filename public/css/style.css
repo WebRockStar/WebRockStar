@@ -1,7 +1,29 @@
-
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
-  padding-bottom: 20px;
+	padding-top:50px;
+	padding-bottom:20px;
 }
+
+#solution {
+	width: 100%;
+	position: relative;
+}
+#fileList, #fileList li, #fileList ul {
+	list-style:none;
+}
+#fileList {
+	height:600px;
+	width:20%;
+	position:relative;
+	box-sizing:border-box;
+	float:left;
+	box-shadow:0 0 5px rgba(0,0,0,0.3);
+}
+#codeEditor ~ .CodeMirror {
+	position:relative;
+	margin-left:2px;
+	box-shadow:0 0 10px rgba(0,0,0,0.3);
+	height:600px;
+	width: 80%;
+}
+
