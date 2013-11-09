@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
-var express = require('express')
+var express = require('express') 
+  , engine = require('ejs-locals')
   , routes = require('./routes')
   , candidate = require('./routes/candidate')
   , http = require('http')
@@ -11,16 +12,20 @@ var express = require('express')
 
 var app = express();
 
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.use(express.compress());
 app.use(express.favicon());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
+app.use(express.cookieParser('WebRockStar is awesome!'));
 app.use(express.session());
 app.use(app.router);
 
