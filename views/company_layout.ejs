@@ -51,6 +51,7 @@
         WRS.login(user, password, function(){
           $("#login-panel").hide();
           $("#logout-panel").show();
+          $("#company-panel").show();
         });
       });
 
@@ -67,6 +68,7 @@
         WRS.logout();
         $('#logout-panel').hide();
         $('#login-panel').show();
+        $("#company-panel").hide();
       });
 
     });
@@ -85,10 +87,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">WebRock<span class="glyphicon glyphicon-star"></span></a>
+          <a class="navbar-brand" href="#">&lt;Web&gt;RockStar</a>
         </div>
+
         <div class="navbar-collapse collapse">
-          <div id="login-panel" class="navbar-form navbar-right" style="<%= (USER != null ? 'display:none':'') %>">
+ 
+           <ul id="company-panel" class="nav navbar-nav" style="<%= (COMPANY_USER == null ? 'display:none':'') %>">
+            <li class="active"><a href="/company/problems"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;Manage Problems</a></li>
+            <li><a href="/company/analytics"><span class="glyphicon glyphicon-signal"></span>&nbsp;Analytics</a></li>
+           </ul>
+
+          <div id="login-panel" class="navbar-form navbar-right" style="<%= (COMPANY_USER != null ? 'display:none':'') %>">
             <div class="form-group">
               <input id='wrs-email' type="text" placeholder="Email" class="form-control">
             </div>
@@ -100,7 +109,7 @@
             <button id="wrs-sign-up" class="btn btn-info">Sign Up</button>
           </div>
 
-          <div id="logout-panel" class="navbar-form navbar-right" style="<%= (USER == null ? 'display:none':'') %>">
+          <div id="logout-panel" class="navbar-form navbar-right" style="<%= (COMPANY_USER == null ? 'display:none':'') %>">
             <button id="wrs-logout" class="btn btn-danger">Logout</button>
           </div>
         </div>

@@ -5,8 +5,9 @@
 
 var express = require('express') 
   , engine = require('ejs-locals')
-  , routes = require('./routes')
+  , home = require('./routes')
   , candidate = require('./routes/candidate')
+  , company = require('./routes/company')
   , http = require('http')
   , path = require('path');
 //  , Parse =  require('kaiseki');
@@ -39,10 +40,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.post('/test/mysql',candidate.mysql);
-app.get('/', routes.index);
-app.get('/login', candidate.login);
+app.get('/', company.auth, home.index);
+app.get('/company/problems', company.auth, company.problems);
 
+app.get('/login', candidate.login);
+app.post('/test/mysql',candidate.mysql);
 app.get('/test', candidate.login,candidate.test);
 app.post('/test',candidate.login,candidate.testfunc);
 //Configure application for parse

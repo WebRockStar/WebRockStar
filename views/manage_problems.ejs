@@ -1,0 +1,203 @@
+<% layout('company_layout') -%>
+
+<link href="css/app.css" rel="stylesheet">
+  
+	<div class="row panel">
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="wrs-file-name">Problem</label>
+        <textarea id="wrs-file-content" class="form-control" rows="3" placeholder="Problem description"></textarea>
+      </div>
+      <ul class="nav nav-tabs">
+        <li><a href="#wrs-tab-question" data-toggle="tab">Question</a></li>
+        <li><a href="#wrs-tab-testcase" data-toggle="tab">Test Case</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane" id="wrs-tab-question">
+          <div class="col-md-3">
+            <div class="row">
+              <div class="tree">
+                <ul>
+                  <li><a href="#" class="active"><span class="glyphicon glyphicon-folder-open">/</span></a><button class="btn btn-xs">New</button></li>
+                  <ul>
+                    <li>
+                      <a href="#"><span class="glyphicon glyphicon-file">index.js</span></a>
+                    </li>
+                    <li>
+                      <a href="#"><span class="glyphicon glyphicon-folder-open">views</span><button class="btn btn-xs">New</button></a>
+                      <ul>
+                        <a href="#"><li><span class="glyphicon glyphicon-file">index.ejs</span></a></li>
+                        <a href="#"><li><span class="glyphicon glyphicon-file">app.ejs</span></a></li>
+                        <a href="#"><li><span class="glyphicon glyphicon-file">web.ejs</span></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </ul>
+              </div> <!-- tree -->
+            </div> <!-- row -->
+          </div><!-- col-md-3 -->
+          <div class="col-md-9">
+            <div class="wrs-left-border">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4>/</h4>
+                  <span class="wrs-pull-right">
+                    <button class="btn btn-danger">Delete</button>
+                  </span>
+                </div>
+                <div class="panel-body">
+                  <form role="form">
+                    <div class="form-group">
+                       <label for="wrs-file-name">Name</label>
+                       <input type="text" class="form-control" id="wrs-file-name">
+                    </div>
+                    <div class="form-group">
+                      <label class="radio-inline">
+                        <input type="radio" name="wrs-file-type" id="wrs-file-type1" value="file" checked>
+                        file
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="wrs-file-type" id="wrs-file-type2" value="folder">
+                        folder
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label for="wrs-file-name">Type</label>
+                      <select class="form-control" id="wrs-file-mime">
+                        <option>html</option>
+                        <option>xml</option>
+                        <option>js</option>
+                        <option>json</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="wrs-file-name">Content</label>
+                      <textarea id="wrs-file-content" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="checkbox">
+                       <label><input id="wrs-file-editable" type="checkbox" checked> Editable</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
+                  </form>
+                </div> <!-- panel-body -->
+              </div> <!-- panel -->
+            </div> <!-- wrs-left-border -->
+          </div><!-- col-md-9 -->
+        </div> <!-- wrs-tab-question -->
+        <div class="tab-pane active" id="wrs-tab-testcase">
+          <div class="col-md-3">
+            <div class="row">
+              <div class="tree">
+                <button class="btn btn-primary btn-block">New</button>
+                <ul>
+                  <li><a href="#"><span class="glyphicon glyphicon-folder-open">/</span></a></li>
+                  <ul>
+                    <li><a href="#"><span class="glyphicon glyphicon-file">TestCase00</span></a></li>
+                    <li><a href="#" class="active"><span class="glyphicon glyphicon-file">TestCase01</span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-file">TestCase02</span></a></li>
+                  </ul>
+                </ul>
+                <ul><strong>Total Points</strong>:100</ul>
+              </div> <!-- tree -->
+            </div> <!-- row -->
+          </div><!-- col-md-3 -->
+          <div class="col-md-9">
+            <div class="wrs-left-border">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4>TestCase01</h4>
+                  <span class="wrs-pull-right">
+                    <button class="btn btn-danger">Delete</button>
+                  </span>
+                </div>
+                <div class="panel-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="wrs-file-name">Input</label>
+                      <div id="initInput" class="row">
+                        <div class="form-group col-xs-6">
+                          <input type="text" class="form-control wrs-key" placeholder="Key">
+                        </div>
+                        <div class="form-group col-xs-5">
+                          <input type="text" class="form-control" placeholder="Value">
+                        </div>
+                      </div> <!-- row -->
+                    </div>
+                    <div class="form-group">   
+                      <label for="wrs-file-name">Output</label>                 
+                      <div id="initOutput" class="row">
+                        <div class="form-group col-xs-6">
+                          <input type="text" class="form-control wrs-key" placeholder="Key">
+                        </div>
+                        <div class="form-group col-xs-5">
+                          <input type="text" class="form-control" placeholder="Value">
+                        </div>
+                      </div> <!-- row -->
+                    </div>
+                    <div class="form-group">
+                       <label for="wrs-test-point">Target URL</label>
+                       <div class="input-group">
+                        <span class="input-group-addon">http://</span>
+                        <input type="text" class="form-control" placeholder="target url">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
+                  </form>
+                </div> <!-- panel-body -->
+              </div> <!-- panel -->
+            </div> <!-- wrs-left-border -->
+          </div><!-- col-md-9 -->
+        </div> <!-- wrs-tab-testcase -->
+      </div>
+    </div> <!-- panel-body -->
+  </div> <!-- row -->
+</div>
+</body>
+<script>
+  function addRow(section, initRow) {
+    var newRow = initRow.clone().removeAttr('id').addClass('new').insertBefore(initRow),
+        deleteRow = $('<a class="rowDelete"><img src="images/delete.png"></a>');
+   
+    newRow
+        .append(deleteRow)
+        .on('click', 'a.rowDelete', function() {
+            removeRow(newRow, initRow);
+        })
+        .slideDown(300, function() {
+            $(this)
+                .find('input.wrs-key').focus();
+        })
+}
+        
+function removeRow(newRow, initRow) {
+    newRow
+        .slideUp(200, function() {
+            $(this)
+                .next('div:not(initRow)')
+                    .find('input').focus()
+                    .end()
+                .end()
+                .remove();
+        });
+}
+
+$(function () {
+    var initInput = $('#initInput'),
+        section = initInput.parent('section');
+    
+    initInput.on('focus', 'input', function() {
+        addRow(section, initInput);
+    });
+});
+$(function () {
+    var initOutput = $('#initOutput'),
+        section = initOutput.parent('section');
+    
+    initOutput.on('focus', 'input', function() {
+        addRow(section, initOutput);
+    });
+});
+</script>
+
