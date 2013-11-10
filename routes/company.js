@@ -33,41 +33,43 @@ exports.problems = function(req, res){
 };	
 
 exports.invites = function(req, res){
-	var invites = [{
-		id: '123',
-		email: 'i.abhi27@gmail.com',
-		problemId: '94854',
-		problemName: 'Login Page',
-		problemDifficultyLevel: '3',
-		status: 'ATTEMPTED',
-		sentOn: '2013-10-13 4:58 PM GMT',
-		validTill: '2013-10-13 5:58 PM GMT',
-		duration: '59.65'
-	},
-	{
-id: '123',
-		email: 'i.abhi27@gmail.com',
-		problemId: '94854',
-		problemName: 'Login Page',
-		problemDifficultyLevel: '3',
-		status: 'PENDING',
-		sentOn: '2013-10-13 4:58 PM GMT',
-		validTill: '2013-10-13 5:58 PM GMT',
-		duration: '59.65'
-	},
-	{
-id: '123',
-		email: 'i.abhi27@gmail.com',
-		problemId: '94854',
-		problemName: 'Login Page',
-		problemDifficultyLevel: '3',
-		status: 'EXPIRED',
-		sentOn: '2013-10-13 4:58 PM GMT',
-		validTill: '2013-10-13 5:58 PM GMT',
-		duration: '59.65'
-	}];
 
-	res.render('company_invites', {PAGE: 'company_invites', INVITES: invites, COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
+	var parse = ParseREST.connect();
+	parse.getObjects('Problem', function(error, response, problems, success) {
+		var EASY_PROBLEMS=[], MODERATE_PROBLEMS=[], HARD_PROBLEMS=[];
+		if(error) {
+			console.log(error);
+			problems= [];
+		}
+		console.log(problems);
+
+		for(var i=0; i<problems.length; i++){
+			if(problems[i].problemDetails.difficulty == 'HARD') {
+				HARD_PROBLEMS.push({id:problems[i].objectId, name:problems[i].problemDetails.name});
+			}
+			if(problems[i].problemDetails.difficulty == 'MODERATE') {
+				MODERATE_PROBLEMS.push({id:problems[i].objectId, name:problems[i].problemDetails.name});
+			}
+			if(problems[i].problemDetails.difficulty == 'EASY') {
+				EASY_PROBLEMS.push({id:problems[i].objectId, name:problems[i].problemDetails.name});
+			}
+		}
+
+		parse.getObjects('Invite', function(error, response, invites, success) {
+			if(error) {
+				invites = [];
+			}
+			console.log(invites);
+
+			res.render('company_invites', {
+					EASY_PROBLEMS: EASY_PROBLEMS, 
+					MODERATE_PROBLEMS: MODERATE_PROBLEMS,
+					HARD_PROBLEMS: HARD_PROBLEMS,
+					PAGE: 'company_invites', INVITES: invites, COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
+			
+		})
+	});
+
 };	
 
 exports.analytics = function(req, res){
