@@ -1,6 +1,6 @@
 <% layout('company_layout') -%>
 
-<link href="css/app.css" rel="stylesheet">
+<link href="/public/css/app.css" rel="stylesheet">
   
 	<div class="row panel">
     <div class="panel-body">
@@ -89,13 +89,10 @@
           <div class="col-md-3">
             <div class="row">
               <div class="tree">
-                <button class="btn btn-primary btn-block">New</button>
+                <button id='new-test-case' class="btn btn-primary btn-block">New</button>
                 <ul>
                   <li><a href="#"><span class="glyphicon glyphicon-folder-open">/</span></a></li>
-                  <ul>
-                    <li><a href="#"><span class="glyphicon glyphicon-file">TestCase00</span></a></li>
-                    <li><a href="#" class="active"><span class="glyphicon glyphicon-file">TestCase01</span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-file">TestCase02</span></a></li>
+                  <ul id='test-case-list'>
                   </ul>
                 </ul>
                 <ul><strong>Total Points</strong>:100</ul>
@@ -155,49 +152,4 @@
   </div> <!-- row -->
 </div>
 </body>
-<script>
-  function addRow(section, initRow) {
-    var newRow = initRow.clone().removeAttr('id').addClass('new').insertBefore(initRow),
-        deleteRow = $('<a class="rowDelete"><img src="images/delete.png"></a>');
-   
-    newRow
-        .append(deleteRow)
-        .on('click', 'a.rowDelete', function() {
-            removeRow(newRow, initRow);
-        })
-        .slideDown(300, function() {
-            $(this)
-                .find('input.wrs-key').focus();
-        })
-}
-        
-function removeRow(newRow, initRow) {
-    newRow
-        .slideUp(200, function() {
-            $(this)
-                .next('div:not(initRow)')
-                    .find('input').focus()
-                    .end()
-                .end()
-                .remove();
-        });
-}
-
-$(function () {
-    var initInput = $('#initInput'),
-        section = initInput.parent('section');
-    
-    initInput.on('focus', 'input', function() {
-        addRow(section, initInput);
-    });
-});
-$(function () {
-    var initOutput = $('#initOutput'),
-        section = initOutput.parent('section');
-    
-    initOutput.on('focus', 'input', function() {
-        addRow(section, initOutput);
-    });
-});
-</script>
-
+<script src='/public/js/manage_problem.js'/>
