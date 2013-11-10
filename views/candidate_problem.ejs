@@ -2,12 +2,32 @@
 
 	<link href="/css/codemirror.css" rel="stylesheet">
   	
-  	<div id='problemDesc'>
-  		<%= probDesc %>
-	 <br>SQL Credentials:
-	 <Strong>User Name</strong> : <div id='username'><%= credentials.user_name %></div><br>
-	 <Strong>User Password</strong> : <div id='password'><%= credentials.user_pass %></div>
-  	</div>
+  	<div class="panel panel-default" id="wrs-problem-desc">
+      <dl class='dl-horizontal'>
+        <dt>Title</dt>
+        <dd>Authentication</dd>
+        <dt>Description</dt>
+        <dd>Implement authentication module</dd>
+        <dt>Constraints</dt>
+        <dd>
+            <li>Constraints 01</li>
+            <li>Constraints 01</li>
+        </dd>
+        <dt>Examples</dt>
+        <dd>
+            <li>Example1</li>
+            <li>Example2</li>
+            <li>Example2</li>
+        </dd>
+        <dt>SQL Credentials</dt>
+        <dd>
+            <dt>Login:</dt>
+            <dd>hnuty2fx</dd>
+            <dt>Password:</dt>
+            <dd>hnuty2fx</dd>
+        </dd>
+      </dl>
+    </div>
   	<div id='solution'>
   	<ul id='fileList'>
   	<%
