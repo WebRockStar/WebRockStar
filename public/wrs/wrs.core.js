@@ -39,7 +39,7 @@ _WRS_CORE.prototype.login = function(email, pass, successCallback, errorCallback
 			wrs.setCurrentUser(user);
 			console.log("Log in successful for user: " + user.get("email"));
 			wrs._ui.showInfo("Welcome, " + user.get("email") + "!");
-			
+
 			successCallback(user)
 		},
 		error: function(user, error) {
@@ -120,4 +120,14 @@ _WRS_CORE.prototype.setCookie = function(name, value, expires, path, domain, sec
 		( ( path ) ? ';path=' + path : '' ) + 
 		( ( domain ) ? ';domain=' + domain : '' ) +
 		( ( secure ) ? ';secure' : '' );
+};
+
+_WRS_CORE.prototype.showProblem = function(problemId, modalId) {
+	// get problem info
+	problemInfo = {
+		"title": "Login Page",
+		"desc": "WTF",
+		"difficulty": "Hard"
+	};
+	this._ui.showProblemModal(modalId, problemInfo);
 };
