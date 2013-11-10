@@ -1,4 +1,6 @@
 var os = require('os'), fs = require('fs'), cheerio = require('cheerio'), exec = require('child_process').exec, mysql = require('mysql');
+var ParseREST = require('../lib/parse');
+
 var connection = mysql.createConnection( {
 	host: 'localhost',
 	user : process.env.MYSQL_ROOT_USER,
@@ -6,18 +8,16 @@ var connection = mysql.createConnection( {
 });
 connection.connect();
 exports.login = function(req, res, next) {
-	//verify sessions//
 
-	if (req.query.id == 'test') {
-		next();
-	} else {
-
-		res.render('home', {
-			title : 'Wrong password'
+	var parse = ParseREST.connect();
+	parse.getObject('Invite', inviteId, function(error, response, body, success) {
+		var problemId = body.problemId;
+		parse.getObject('Problem', problemId, function(error, response, body, success) {
+				req.problemBody = body;
+				next();
 		});
+	});
 
-	}
-	// next();
 };
 
 var problemDescription = "Implement authentication module \
@@ -80,9 +80,10 @@ exports.test = function(req, res) {
 	var genPass = (Date.now()).toString(36);
 
 	connection.query("CREATE USER '"+genUser+"'@'localhost' IDENTIFIED BY  '"+genPass+"'");connection.query(" CREATE DATABASE IF NOT EXISTS  `"+genUser+"`");connection.query("GRANT ALL PRIVILEGES ON  `"+genUser+"` . * TO  '"+genUser+"'@'localhost'");
+	console.log(req.problemBody);
 	res.render('candidate_problem', {
-		probDesc : problemDescription,
-		fileList : template,
+		probDesc : req.problemBody.problemDetails,
+		fileList : req.problemBody.template,
 		credentials : {'user_name':genUser,'user_pass':genPass}
 	});
 
