@@ -94,9 +94,9 @@
         <div class="navbar-collapse collapse">
  
            <ul id="company-panel" class="nav navbar-nav" style="<%= (COMPANY_USER == null ? 'display:none':'') %>">
-            <li <%- (PAGE == 'company_problems' ? 'class="active"' : '') %>><a href="/company/problems"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;Manage Problems</a></li>
+            <li <%- (PAGE == 'company_problems' ? 'class="active"' : '') %>><a href="/company/problems"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Create Problem</a></li>
             <li <%- (PAGE == 'company_invites' ? 'class="active"' : '') %>><a href="/company/invites"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Send Invites</a></li>
-            <li <%- (PAGE == 'company_analytics' ? 'class="active"' : '') %>><a href="/company/analytics"><span class="glyphicon glyphicon-signal"></span>&nbsp;Analyze Results</a></li>
+            <li <%- (PAGE == 'company_analytics' ? 'class="active"' : '') %>><a href="/company/analytics"><span class="glyphicon glyphicon-stats"></span>&nbsp;Analyze Results</a></li>
            </ul>
 
           <div id="login-panel" class="navbar-form navbar-right" style="<%= (COMPANY_USER != null ? 'display:none':'') %>">
@@ -106,13 +106,13 @@
             <div class="form-group">
               <input id='wrs-password' type="password" placeholder="Password" class="form-control">
             </div>
-            <button id="wrs-sign-in" class="btn btn-success">Sign In</button>
+            <button id="wrs-sign-in" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Sign In</button>
             or
             <button id="wrs-sign-up" class="btn btn-info">Sign Up</button>
           </div>
 
           <div id="logout-panel" class="navbar-form navbar-right" style="<%= (COMPANY_USER == null ? 'display:none':'') %>">
-            <button id="wrs-logout" class="btn btn-danger">Logout</button>
+            <button id="wrs-logout" class="btn btn-danger"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</button>
           </div>
         </div>
         <!--/.navbar-collapse -->

@@ -1,2 +1,94 @@
 <% layout('company_layout') %>
-Hello World Invites
+
+  <div class="form-group">
+        <a href="#add-candidate-modal" role="button" class="btn btn-default btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span>&nbsp;New Invite</a>
+  </div>
+
+  <div class="modal fade" id="add-candidate-modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">            
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="myModalLabel">
+            New Invite
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12 column">
+            <form role="form">
+              <div class="form-group">
+                 <label for="wrs-enroll-email">Candidate Email</label><input type="email" class="form-control" id="wrs-enroll-email" />
+              </div>
+              <div class="form-group">
+                <label for="wrs-enroll-complex">Problem Difficulty</label>
+                <select class="form-control" id="wrs-enroll-complex">
+                  <option>Random</option>   
+                  <option>Easy</option>
+                  <option>Moderate</option>
+                  <option>Hard</option>                   
+                </select>
+              </div>
+              <div class="form-group" style="display:none">
+                <label for="wrs-enroll-problem">Select Problem</label>
+                <select class="form-control" id="wrs-enroll-problem">                  
+                </select>
+              </div>
+              <div class="form-group">
+                 <label for="wrs-enroll-valid">Expiry Date</label><input type="date" class="form-control" id="wrs-enroll-valid" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>&nbsp;Send Invite</button>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <p class="lead">Previous Invites</p>
+  <hr/>
+  
+  <table class="table table-bordered table-hover table-striped table-condensed">
+    <thead>
+      <tr> <th> ID </th> <th> Email </th> <th> Problem Name </th> <th> Difficulty Level </th> <th> Status </th> <th> Test Duration </th> <th> Sent on </th> <th> Valid till </th> </tr> 
+      </thead> 
+      <tbody>
+     	<% for(var i=0; i<INVITES.length; i++) { %>
+     		<tr class="<%= (INVITES[i].status == 'EXPIRED' ? 'danger' : (INVITES[i].status == 'ATTEMPTED' ? 'success' : '')) %>">
+     			<td><a href='/candidate/test?id=<%= INVITES[i].id %>' target='_blank'><%= INVITES[i].id %></a></td>
+     			<td><%= INVITES[i].email %></td>
+     			<td><a class='problem-link' href='#' data-problem-id='<%= INVITES[i].problemId %>'><%= INVITES[i].problemName %></a></td>
+     			<td><%= INVITES[i].problemDifficultyLevel %></td>
+     			<td><%= INVITES[i].status %></td>
+     			<td><%= INVITES[i].duration %></td>
+     			<td><%= INVITES[i].sentOn %></td>
+     			<td><%= INVITES[i].validTill %></td>
+     		</tr>
+     	<% } %>
+      </tbody>
+  </table>
+
+  <div id='problem-view-modal' class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+	$('.problem-link').click(function(){
+		WRS.showProblem($(this).data('problem-id'), '#problem-view-modal');
+	});
+</script>
