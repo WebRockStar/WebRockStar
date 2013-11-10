@@ -10,7 +10,7 @@
       </div>
       <div class="form-group">
         <label for="wrs-file-problem-statement">Problem description</label>
-        <textarea id="wrs-file-problem-statement" class="form-control" rows="3" placeholder="Problem description"></textarea>
+        <textarea id="srs-file-problem-statement" class="form-control" rows="3" placeholder="Problem description"></textarea>
       </div>
       <ul class="nav nav-tabs">
         <li><a href="#wrs-tab-question" data-toggle="tab">Question</a></li>
@@ -42,7 +42,7 @@
           </div><!-- col-md-3 -->
           <div class="col-md-9">
             <div class="wrs-left-border">
-              <div class="panel panel-default">
+              <div class="panel panel-default filestruct-panel">
                 <div class="panel-heading">
                   <h4>/</h4>
                   <span class="wrs-pull-right">
@@ -81,6 +81,8 @@
                     <div class="checkbox">
                        <label><input id="wrs-file-editable" type="checkbox" checked> Editable</label>
                     </div>
+                    <button type="submit" class="btn btn-primary filestruct-save">Save</button>
+                    <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
                   </form>
                 </div> <!-- panel-body -->
               </div> <!-- panel -->
@@ -141,16 +143,14 @@
                         <input type="text" class="form-control" id="target-url" placeholder="target url">
                       </div>
                     </div>
+		     <button type="button" class="btn btn-primary test-case-save">Save</button>
+		      <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
                   </form>
                 </div> <!-- panel-body -->
               </div> <!-- panel -->
             </div> <!-- wrs-left-border -->
           </div><!-- col-md-9 -->
         </div> <!-- wrs-tab-testcase -->
-      </div>
-      <div class="pull-right">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
       </div>
     </div> <!-- panel-body -->
   </div> <!-- row -->

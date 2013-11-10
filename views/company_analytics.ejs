@@ -11,47 +11,26 @@
 			<th>Score</th>
 			<th>Attempted Time</th>
 			<th>Submission Time</th>
-			<th>Duration</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
 <tbody>
 	<% for(var i=0; i<CANDIDATES.length; i++) { %>
 		<tr>
-			<td><%= CANDIDATES[i].email %></td>
+			<td><%= CANDIDATES[i].userEmail %></td>
 			<td><a href='#' class='problem-link' data-problem-id='<%= CANDIDATES[i].problemId %>'><%= CANDIDATES[i].problemName %> (<%= CANDIDATES[i].problemDifficultyLevel %>)</a></td>
 			<td><%= CANDIDATES[i].score %></td>
-			<td><%= CANDIDATES[i].attemptedTime %></td>
-			<td><%= CANDIDATES[i].submissionTime %></td>
-			<td><%= CANDIDATES[i].duration %></td>
-			<td><a href='/candidate/solution?id=<%= CANDIDATES[i].solutionId %>' target='_blank'>View Solution</a></td>
+			<td><%= CANDIDATES[i].createdAt %></td>
+			<td><%= CANDIDATES[i].updatedAt %></td>
+			<td><a href='/candidate/solution?id=<%= CANDIDATES[i].answerId %>' target='_blank'>View Solution</a></td>
 		</tr>
 	<% } %>
 </tbody>
 </table>
-<div id='problem-view-modal' class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 <script>
 	$('#result-analysis-table').dataTable({
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers"
-	});
-
-	$('.problem-link').click(function(){
-		WRS.showProblem($(this).data('problem-id'), '#problem-view-modal');
 	});
 </script>

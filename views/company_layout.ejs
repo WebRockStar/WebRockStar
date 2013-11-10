@@ -123,6 +123,42 @@
       <%- body %>
     </div>
 
+  <div id='problem-view-modal' class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="problem-title"></h4>
+      </div>
+      <div class="modal-body">
+      <p class="lead">Description</p>
+      <div class="problem-desc">
+      </div>
+      <hr/>
+      <p class="lead">Constraints</p>
+      <div class="problem-constrains">
+      </div>
+      <hr/>
+      <p class="lead">Examples</p>
+      <div class="problem-examples">
+      </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" id='problem-detail-btn' class="btn btn-primary">View Template/Testcases&nbsp;<span class="glyphicon glyphicon-forward"></span></button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+  $('.problem-link').click(function(){
+    WRS.showProblem($(this).data('problem-id'), '#problem-view-modal');
+  });
+  $('#problem-detail-btn').click(function(){
+    location.href = "/problem?id=" + $(this).parents('#problem-view-modal').data('problem-id');
+  });
+</script>
 
   </body>
 </html>
