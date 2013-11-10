@@ -37,9 +37,15 @@ var app = require('/tmp/'+answerId+'/app.js');
 //this will start the application
 //fetch the testcases for the application
 console.log('will call'+server_name+':'+server_port);
+var resultJSON = {
+	answerId = answerId,
+	problemDifficultyLevel: 'MODERATED',
+	problemId:questionId,
+	problemName:"testData",
+	userEmail:'akash6190@gmail.com'};
+
 var testStatus = new Array();
 testSet.forEach(function(ts,i){
-
 client.url('http://'+server_name+":"+server_port+ ts.testUrl)
 	//var tcid = v.tcid;
 	try{
@@ -60,8 +66,12 @@ client.url('http://'+server_name+":"+server_port+ ts.testUrl)
 			}
 		})
 	});
+		resultJSON['testCases'] = testStatus;
+	
 }catch (e){
 	testStatus.push({'tcid':tcid,'status':'Runtime Error..:\'('})
+		resultJSON['testCases'] = testStatus;
+	
 	process.exit(1);
 	}
 });

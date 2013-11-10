@@ -12,12 +12,74 @@ var currParr = '/';
 $('.filestruct-panel').closest('.col-md-9').hide();
 var fileStruct = problemJson.template.fileStruct;
 $('#wrs-tab-question').on('click','.glyphicon-plus',function(){
-	currParr = $(this).siblings('span.glyphicon-folder-open');
+//	currParr = $(this).siblings('span.glyphicon-folder-open');
 	//set the current folder 
+	$(this).closest('li').attr('data-obj-id');
 	$('#wrs-tab-question .panel-heading >h4').text()
 	$('.filestruct-panel').closest('.col-md-9').show();
 });
 
+//get info
+var getObjInfo = function() {
+	var retVal = {};
+	retVal.objid = (Date.now()).toString(36);
+	retVal.type = $('[name="wrs-file-type"][checked]').val();
+	if(retVal.type == 'file'){
+		retVal.mime = $("#wrs-file-mime").val();
+		retVal.contents = $("#wrs-file-content").val();
+		retVal.editable = $("#wrs-file-editable").val();
+	}else {
+		retVal.children = []
+	}
+
+	retVal.name= $('#wrs-file-name').val()
+	return retVal;
+}
+
+var addToFolder = function(ob){
+	//get current objId
+	var tempId = $('#current-obj').attr('data-current-obj-id');
+	var ancestors = [] ;
+
+	while(tempId != 'ROOTOBJ'){
+		ancestors.push(tempId);
+	 tempId = $('#'+tempId).closest("[data-obj-type='folder']").attr('id');
+	}
+	var tempParent = fileStruct;
+	var lastParent = ancestors.pop();
+		for(var i=0; i< tempParent.length; i++){
+			if(lastParent == tempParent[i].objid){
+				tempParent = tempParent[i].children;
+				if(lastParent = ancestors.pop()){
+					continue;
+				}else{
+					break;
+				}
+			}
+		}
+tempParent.push(ob);
+
+
+}
+
+var getHtml = function(ob){
+	if(ob.type=='file'){
+		return '<li ><a href="#"><span class="glyphicon glyphicon-file">'+ob.name+'</span></a></li>';
+	}else{
+		return '<li data-obj-type="folder" id="'+ob.objid+'"><a href="#"><span class="glyphicon glyphicon-folder-open">'+ob.name+'</span></a><a clas="btn btn-xs btn-danger"><span class="glyphicon glyphicon-plus"></span></a></li><ul class='+ob.objid+'> </ul>';
+	}
+}
+//add Folder to location
+//add File to Location
+//search for the object in 
+$('.filestruct-save').on('click',function(){
+	var ob = getObjInfo();
+	addToFolder(ob);
+	//once added show it on the screen
+	//save all the folders
+	 $('ul.' + $('#current-obj').attr('data-current-obj-id')).append(getHtml(ob));
+	$('.filestruct-panel').closest('.col-md-9').hide();
+});
 
   //<li><a href="#"><span class="glyphicon glyphicon-file">TestCase00</span></a></li>
 var testCases = $('#test-case-list')[0];
