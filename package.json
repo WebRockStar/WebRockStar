@@ -9,7 +9,7 @@
     "express": "3.3.4",
     "ejs": "*",
     "mysql": "~2.0.0-alpha9",
-    "mongo": "*",
+    "mongodb": "*",
     "ejs-locals": "~1.0.2",
     "cheerio": "~0.12.3",
     "webdriverjs": "~0.7.14",
