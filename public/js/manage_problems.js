@@ -7,11 +7,11 @@
 
 
   //<li><a href="#"><span class="glyphicon glyphicon-file">TestCase00</span></a></li>
-var testCases = $('#test-case-list');
-var counters = [testCase:0,]
+var testCases = $('#test-case-list')[0];
+var counters = {testcase:0}
   $('#new-test-case').on('click',function(){
 	  //insert test case in uias will as in json
-	  testCases.append('<li><a href="#"><span class="glyphicon glyphicon-file">Test'+ counter.testCase++ +'</span></a></li>');
+	  testCases.appendChild('<li><a href="#"><span class="glyphicon glyphicon-file">Test'+ counters.testCase++ +'</span></a></li>');
 	  problemJson.templates.testSet.push({id: counter.testCase, value: {}});
 	  });
   //this will be added once problemJson.template.testSet has some key value pairs

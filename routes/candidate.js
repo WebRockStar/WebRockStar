@@ -80,7 +80,7 @@ exports.test = function(req, res) {
 	var genPass = (Date.now()).toString(36);
 
 	connection.query("CREATE USER '"+genUser+"'@'localhost' IDENTIFIED BY  '"+genPass+"'");connection.query(" CREATE DATABASE IF NOT EXISTS  `"+genUser+"`");connection.query("GRANT ALL PRIVILEGES ON  `"+genUser+"` . * TO  '"+genUser+"'@'localhost'");
-	res.render('problem', {
+	res.render('candidate_problem', {
 		probDesc : problemDescription,
 		fileList : template,
 		credentials : {'user_name':genUser,'user_pass':genPass}

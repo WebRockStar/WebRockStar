@@ -47,9 +47,9 @@ app.get('/company/analytics', company.auth, company.analytics);
 
 
 app.get('/login', candidate.login);
-app.post('/test/mysql',candidate.mysql);
-app.get('/test', candidate.login,candidate.test);
-app.post('/test',candidate.login,candidate.testfunc);
+app.post('/candidate/mysql',candidate.mysql);
+app.get('/candidate', candidate.login,candidate.test);
+app.post('/candidate',candidate.login,candidate.testfunc);
 //Configure application for parse
 
 http.createServer(app).listen(app.get('port'), function(){
