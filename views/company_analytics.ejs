@@ -1,2 +1,38 @@
 <% layout('company_layout') %>
-Hello World Analytics
+    <link href="/css/jquery.dataTables.css" rel="stylesheet">
+    <link href="/css/jquery-ui-1.8.4.custom.css" rel="stylesheet">
+    <link href="/css/jquery.dataTables_themeroller.css" rel="stylesheet">
+
+<table id='result-analysis-table'>
+	<thead>
+		<tr>
+			<th>Candidate</th>
+			<th>Problem</th>
+			<th>Score</th>
+			<th>Attempted Time</th>
+			<th>Submission Time</th>
+			<th>Duration</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+<tbody>
+	<% for(var i=0; i<CANDIDATES.length; i++) { %>
+		<tr>
+			<td><%= CANDIDATES[i].email %></td>
+			<td><a href='#' class='problem-link' data-problem-id='<%= CANDIDATES[i].problemId %>'><%= CANDIDATES[i].problemName %> (<%= CANDIDATES[i].problemDifficultyLevel %>)</a></td>
+			<td><%= CANDIDATES[i].score %></td>
+			<td><%= CANDIDATES[i].attemptedTime %></td>
+			<td><%= CANDIDATES[i].submissionTime %></td>
+			<td><%= CANDIDATES[i].duration %></td>
+			<td><a href='#' class='solution-link' data-solution-id='<%= CANDIDATES[i].solutionId %>'>View Solution</a></td>
+		</tr>
+	<% } %>
+</tbody>
+</table>
+
+<script>
+	$('#result-analysis-table').dataTable({
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers"
+	});
+</script>
