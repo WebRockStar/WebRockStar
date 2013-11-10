@@ -110,25 +110,25 @@
                 </div>
                 <div class="panel-body">
                   <form role="form">
-                    <div class="form-group">
+                    <div class="form-group" id="wrs-inp-val">
                       <label for="wrs-file-name">Input</label>
                       <div id="initInput" class="row">
                         <div class="form-group col-xs-6">
                           <input type="text" class="form-control wrs-key" placeholder="Key">
                         </div>
                         <div class="form-group col-xs-5">
-                          <input type="text" class="form-control" placeholder="Value">
+                          <input type="text" class="form-control wrs-val" placeholder="Value">
                         </div>
                       </div> <!-- row -->
                     </div>
-                    <div class="form-group">   
+                    <div class="form-group" id="wrs-out-val">   
                       <label for="wrs-file-name">Output</label>                 
                       <div id="initOutput" class="row">
                         <div class="form-group col-xs-6">
                           <input type="text" class="form-control wrs-key" placeholder="Key">
                         </div>
                         <div class="form-group col-xs-5">
-                          <input type="text" class="form-control" placeholder="Value">
+                          <input type="text" class="form-control wrs-val" placeholder="Value">
                         </div>
                       </div> <!-- row -->
                     </div>
@@ -136,10 +136,10 @@
                        <label for="wrs-test-point">Target URL</label>
                        <div class="input-group">
                         <span class="input-group-addon">http://</span>
-                        <input type="text" class="form-control" placeholder="target url">
+                        <input type="text" class="form-control" id="target-url" placeholder="target url">
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary test-case-save">Save</button>
                     <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
                   </form>
                 </div> <!-- panel-body -->

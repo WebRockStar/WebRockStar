@@ -8,18 +8,50 @@
 
   //<li><a href="#"><span class="glyphicon glyphicon-file">TestCase00</span></a></li>
 var testCases = $('#test-case-list')[0];
-var counters = {testcase:0}
-  $('#new-test-case').on('click',function(){
+var counters = {testCase:0}
+
+  $('#new-test-case').on('click',function(e){
+	  console.log(counters.testCase)
 	  //insert test case in uias will as in json
-	  testCases.appendChild('<li><a href="#"><span class="glyphicon glyphicon-file">Test'+ counters.testCase++ +'</span></a></li>');
-	  problemJson.templates.testSet.push({id: counter.testCase, value: {}});
-	  });
+	  var t = $('<li class="wrs-test-case" data-wrs-case="'+counters.testCase++ +'"><a href="#"><span class="glyphicon glyphicon-file">Test'+ counters.testCase +'</span></a></li>');
+	  console.log(counters.testCase);
+	  $(testCases).append(t);
+	  problemJson.template.testSet[counters.testCase] = {input:[],output:[],targetUrl:'',weight:1}; });
   //this will be added once problemJson.template.testSet has some key value pairs
-  
+ $('body').on('click','.wrs-test-case',function(e){
+	var that = $(this);
+	console.log(that);
+	var testSet = problemJson.template.testSet[parseInt(that.attr('data-wrs-case')) +1];
+$('.panel-heading h4').text('Test' + that.attr('data-wrs-case'));
+$('.panel-heading').attr('data-wrs-case',that.attr('data-wrs-case')); 
+$('.rowDelete').click();
+testSet.input.forEach(function(val){
+	for(var a in val){
+		$('#initInput input[type="text"].wrs-key').val(a);
+		$('#initInput input[type="text"].wrs-val').val(val[a]).focus();
+	}
+	});
+testSet.input.forEach(function(val){
+	for(var a in val){
+		$('#initInput input[type="text"].wrs-key').val(a);
+		$('#initInput input[type="text"].wrs-val').val(val[a]).focus();
+	}
+	});
+testSet.output.forEach(function(val){
+	for(var a in val){
+		$('#initOutput input[type="text"].wrs-key').val(a);
+		$('#initOutput input[type="text"].wrs-val').val(val[a]).focus();
+	}
+	});
+$('#target-url').val(testSet.targetUrl);
+	 }); 
   function addRow(section, initRow) {
     var newRow = initRow.clone().removeAttr('id').addClass('new').insertBefore(initRow),
         deleteRow = $('<a class="rowDelete"><img src="images/delete.png"></a>');
-   
+	initRow.find('input[type="text"]').val('');
+  deleteRow.on('click',function(){
+	  $(this).closest('div.row.new').remove();
+	  }); 
     newRow
         .append(deleteRow)
         .on('click', 'a.rowDelete', function() {
@@ -60,4 +92,24 @@ $(function () {
     });
 });
 
+//code to save all the info
+$('.test-case-save').on('click', function(){
+	var testcaseNo = $('.panel-heading').attr('data-wrs-case');
+	var testSet = problemJson.template.testSet[parseInt(testcaseNo)+1];
+	testSet.input = [];
+	testSet.output = [];
+$('#wrs-inp-val div.row').each(function(){
+var x = $(this);
+var tkey = x.find('.wrs-key').val();
+	testSet.input.push({tkey:x.find('.wrs-val').val()})
+	});
+	
+$('#wrs-out-val div.row').each(function(){
+var x = $(this);
+var tkey = x.find('.wrs-key').val();
+	testSet.output.push({tkey:x.find('.wrs-val').val()})
+	});
 
+testSet.targetUrl = $('#target-url').val();
+console.log(testSet);
+});
