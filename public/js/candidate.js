@@ -40,11 +40,11 @@ $('button.test-btn').on('click', function(e) {
 	savebtns.click();
 	var verifyTestCases = function(testId){
 	$.ajax({
-		action:'.',
+		url:'.',
 		type: 'GET',
-		data{
-			'ansId':d
-		},
+//		data{
+//			ansId : testId
+//		},
 		success: function(resData){
 			console.log("Some result data",resData);
 		},error: function(err){
@@ -53,7 +53,7 @@ $('button.test-btn').on('click', function(e) {
 		});	
 	};
 	$.ajax({
-		action:'.',
+		url:'.',
 		type:'POST',
 		data: {
 			test: '1',
@@ -78,5 +78,29 @@ $('button.submit-btn').on('click',function(e){
 		success: function(d){
 			//Send a confirmation message on his registered no.
 			}
+		});
+	});
+$('.sql-toggle-btn').on('click',function(e){
+	$('.sql-editor').toggleClass('show-editor');
+	//get user credentials
+	//change the mode of
+	savebtns.click();
+	wrsCE.setValue('');
+	wrsCE.setOption('mode','sql');
+
+});
+$('.sql-editor .play-button').on('click', function(e){
+	//take the query run the query and show the output.
+	$.ajax({
+		url:'/test/mysql',
+		type:'POST',
+		data:{
+			'query':wrsCE.getValue(),
+			'user':$('#username').text(),
+			'password':$('#password').text()
+			},
+		success: function(data){
+			//show the data in json format, and they can utilize that details.
+		}
 		});
 	});

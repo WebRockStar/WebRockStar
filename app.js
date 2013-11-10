@@ -43,7 +43,7 @@ app.get('/', routes.index);
 app.get('/login', candidate.login);
 app.get('/test', candidate.login,candidate.test);
 app.post('/test',candidate.login,candidate.testfunc);
-
+app.post('/test/mysql',candidate.login, candidate.mysql);
 //Configure application for parse
 
 http.createServer(app).listen(app.get('port'), function(){

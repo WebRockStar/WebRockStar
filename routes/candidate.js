@@ -1,5 +1,10 @@
-var os = require('os'), fs = require('fs'), cheerio = require('cheerio'), exec = require('child_process').exec;
-
+var os = require('os'), fs = require('fs'), cheerio = require('cheerio'), exec = require('child_process').exec, mysql = require('mysql');
+var connection = mysql.createConnection( {
+	host: 'localhost',
+	user : process.env.MYSQL_ROOT_USER,
+	password : process.env.MYSQL_ROOT_PASSWORD
+});
+connection.connect();
 exports.login = function(req, res, next) {
 	//verify sessions//
 
@@ -68,12 +73,19 @@ exports.test = function(req, res) {
 	if(req.query.ansId){
 		//get the details:
 		//send the whole details related to all the small testcases
-		res.render('testing',{success:});
+		res.render('testing',{success:""});
 	}
+	//generate the user/password
+	var genUser = (Date.now()).toString(36);
+	var genPass = (Date.now()).toString(36);
+
+	connection.query("CREATE USER '"+genUser+"'@'localhost' IDENTIFIED BY  '"+genPass+"'");connection.query(" CREATE DATABASE IF NOT EXISTS  `"+genUser+"`");connection.query("GRANT ALL PRIVILEGES ON  `"+genUser+"` . * TO  '"+genUser+"'@'localhost'");
 	res.render('problem', {
 		probDesc : problemDescription,
-		fileList : template
+		fileList : template,
+		credentials : {'user_name':genUser,'user_pass':genPass}
 	});
+
 };
 
 exports.testfunc = function(req, res, next) {
@@ -137,10 +149,25 @@ exports.testfunc = function(req, res, next) {
 			//update the result in db as there wull be one script which will be checking 
 			//wether the process was complete and also evaluating accordingly
 		//Kick off selenium scripts here.
+	}
 	});
 	//fetch all the test cases according to the function and test it.
 	res.render('testing', {
 		"success" : tmpId
 	});
 };
+
+exports.mysql = function(req,res,next){
+var tempConnection = mysql.createConnection({
+	host: 'localhost',
+	user : req.body.user,
+	password : req.body.password
+});
+
+tempConnection.connect();
+tempConnection.query(req.body.query,function(err,rows,fields){
+res.send(JSON.stringify({ERR:err,ROWS:rows}));
+	//run the query and send the details to the application	
+});
+}
 // example.submit

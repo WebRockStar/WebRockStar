@@ -32,6 +32,47 @@ body {
 	font-weight: bold;
 }
 
+.sql-editor {
+	position: absolute;
+	top: 45%;
+	left: 20%;
+	z-index: 13;
+	height: 47%;
+	width: 80%;
+	background-color: rgba(0,0,0, 0.1);
+	display: none;
+	-webkit-transition: display 1.5s ;
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 10%, #fcfcfc 15%);
+}
+.show-editor {
+	display: block;
+
+}
+.play-button {
+	    height: 28px;
+	        width: 46px;
+		margin-top: 5px;    
+		    background-color: rgba(0, 0, 0, 0.7);
+		        border-radius: 5px;
+			    position: relative;
+}
+
+.play-button:hover {
+	    background-color: rgba(0, 173, 239, 0.9);
+}
+
+.play-button:after {
+	    content: "";
+	        display: block;
+		    position: absolute;
+		        top: 4.5px;
+			    left: 17px;
+			        margin: 0 auto;
+				    border-style: solid;
+				        border-width: 9.5px 0 9.5px 17px;
+					    border-color: transparent transparent transparent rgba(255, 255, 255, 1);
+}
+
 .bts{
 	margin: 10px;
 }
