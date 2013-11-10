@@ -137,3 +137,30 @@ _WRS_CORE.prototype.showProblem = function(problemId, modalId) {
 		}
 	});
 };
+
+_WRS_CORE.prototype.sendInvite = function(email, complex, problemId, problemName, expiry) {
+ 	var inviteObj = {
+ 		email: email,
+ 		problemDifficultyLevel: complex,
+ 		problemId: problemId,
+ 		problemName: problemName,
+ 		status: 'PENDING',
+ 		sentOn: (new Date()).toISOString(),
+ 		validTill: expiry
+ 	};
+ 	var wrs = this;
+ 	var Invite = Parse.Object.extend("Invite");
+ 	var invite = new Invite();
+ 	invite.save(inviteObj, {
+ 		success: function(obj) {
+ 			wrs._ui.showInfo("Invitation to "+email+" successfully sent!");
+ 			location.reload();
+ 		},
+ 		error: function(obj, error) {
+ 			console.log(error);
+ 			wrs._ui.showError("Sorry! Not able to send the invitation. Please try again!");
+ 		}
+ 	});
+};
+
+
