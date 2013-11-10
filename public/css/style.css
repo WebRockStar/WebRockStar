@@ -96,3 +96,16 @@ body section#web .col img {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+
+.wrs-jumbotron
+{
+	background: url('../images/wallpaper.jpg');
+	background-size: cover;
+	/*position: absolute;*/
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+	opacity: .7;
+}
