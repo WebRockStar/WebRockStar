@@ -45,6 +45,7 @@ $('button.test-btn').on('click', function(e) {
 		action:'.',
 		type:'POST',
 		data: {
+			test: '1',
 			flist: $('#fileList').html()
 			},
 		success: function(d){

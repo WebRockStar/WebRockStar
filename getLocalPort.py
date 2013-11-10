@@ -19,15 +19,16 @@ def listen(server_param,port_param):
     s.listen(1)
     ipaddr,port = s.getsockname()
     print ipaddr,port
-    return port
+    return ipaddr,port
     
 ##Save unused port no.
-portNo = listen(get_server(),get_port())
+ipaddr,portNo = listen(get_server(),get_port())
 projLocation = "/tmp/" + sys.argv[1]
 
 # subprocess.check_call(["cd",projLocation]);
 os.chdir(projLocation);
 subprocess.check_call(["npm","install"]);
 ##have towrite to check if there is some problem in the code
+subprocess.check_call(['node','/home/ubuntu/repos/WebRockStar/testSubmission.js',str(ipaddr),str(portNo),str(sys.argv[1]),str(sys.argv[2]),str(sys.argv[3])]);
 # subprocess.call("cd "+projLocation+" && export PORT="+ str(portNo) +" && npm start");
 ## read the tmpId and run npm install 
