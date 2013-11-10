@@ -1,0 +1,60 @@
+<% layout('candidate_layout') -%>
+
+	<link href="/css/codemirror.css" rel="stylesheet">
+  	
+  	<div id='problemDesc'>
+  		<%= probDesc %>
+	 <br>SQL Credentials:
+	 <Strong>User Name</strong> : <div id='username'><%= credentials.user_name %></div><br>
+	 <Strong>User Password</strong> : <div id='password'><%= credentials.user_pass %></div>
+  	</div>
+  	<div id='solution'>
+  	<ul id='fileList'>
+  	<%
+  	var printFile = function(fl){
+  		%>
+  		<li id="<%= fl.objid%>" data-wrs-mime="<%= fl.mime %>" data-wrs-content="<%= fl.contents %>" data-wrs-editable="<%= fl.editable %>" >
+  			<%= fl.name %>
+  		</li><%
+  	}; 
+  	var printFolder = function(fl){
+  		%><ul><%
+  		fl.forEach(function(v,i){
+  			if(v.type == 'folder'){
+  				%><li><%= v.name %></li><% 
+  				printFolder(v.children);
+  				%><%
+  			}else{
+  		printFile(v);
+  		}
+  		});
+  		%></ul><%
+  	}
+  	for(var f in fileList){
+  		if(fileList[f].type == 'folder'){
+  			%><li><%= fileList[f].name %></li><% 
+  			printFolder(fileList[f].children);
+  			%><%
+  		} else {
+  			printFile(fileList[f]);
+  		}
+  	}
+  	 %>
+  	 </ul>
+  	 <textarea id='codeEditor'>
+  	 	Please select a file to open
+  	 </textarea>
+	 <div class='sql-editor'>
+	 	<div class='play-button'> </div>
+		<div id="wrs-sqldata"></div>
+	 </div>
+  	 <!-- Save Button the state will change according to file status-->
+  	 <div class="btn-group bts">
+	 <button class='btn btn-default sql-toggle-btn' > Sql editor</button>
+	  	 <button type="button" class="btn btn-default update-btn" disabled="disabled">Save</button>
+	  	 <button type="button" class="btn btn-default test-btn" >Test</button>
+	  	 <button type="button" class="btn btn-success submit-btn">Submit</button>
+  	 </div>
+  	</div>
+    <script src="/js/codemirror.min.js"></script>
+    <script src="/js/candidate.js"></script>
