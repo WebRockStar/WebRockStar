@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+    <title>WebRock<span class="glyphicon glyphicon-star"></span></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <link href="/css/alertify.core.css" rel="stylesheet">
+    <link href="/css/alertify.bootstrap.css" rel="stylesheet">
+
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+    
+    <script>
+      Parse.initialize("J5v0o2xUAaXvxziD26kzLauhmu6oajOKCmnwUMMw", "xwSgobbHKVUjQxUQ8BmsUWJWfCLM5DP5KRtrpo3C");
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>  
+    <script src="/js/alertify.js"></script>
+
+    <script src="/wrs/wrs.ui.js"></script>
+    <script src="/wrs/wrs.core.js"></script>
+
+    <script>
+    var WRS;
+    $(document).ready(function(){
+      WRS = new _WRS_CORE();
+
+      // Logout button
+      $('#wrs-logout').click(function(){
+        WRS.candidateLogout();
+        $('#logout-panel').hide();
+        $('#login-panel').show();
+      });
+
+    });
+    </script>
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">WebRock<span class="glyphicon glyphicon-star"></span></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <div id="logout-panel" class="navbar-form navbar-right">
+            <button id="wrs-logout" class="btn btn-danger">Logout</button>
+          </div>
+        </div>
+        <!--/.navbar-collapse -->
+      </div>
+    </div>
+   
+    <div class="container">
+      <%- body %>
+    </div>
+
+
+  </body>
+</html>
