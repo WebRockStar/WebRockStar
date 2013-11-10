@@ -42,6 +42,7 @@ if ('development' == app.get('env')) {
 app.post('/test/mysql',candidate.mysql);
 app.get('/', routes.index);
 app.get('/login', candidate.login);
+
 app.get('/test', candidate.login,candidate.test);
 app.post('/test',candidate.login,candidate.testfunc);
 //Configure application for parse

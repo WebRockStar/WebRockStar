@@ -15,6 +15,7 @@
     "webdriverjs": "~0.7.14",
     "chai": "~1.8.1",
     "mocha": "~1.14.0",
-    "phantomjs": "~1.9.2-2"
+    "phantomjs": "~1.9.2-2",
+    "kaiseki": "*"
   }
 }

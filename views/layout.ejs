@@ -9,12 +9,14 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>WebRock<span class="glyphicon glyphicon-star"></span></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <link href="/css/alertify.core.css" rel="stylesheet">
+    <link href="/css/alertify.bootstrap.css" rel="stylesheet">
+
     <link href="/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -23,17 +25,59 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     
+    <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
     
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+      Parse.initialize("FySKlmI271DtIh7G0LVjtPBPLIYN2S7mVEu5BlCi", "FgDHQoLGNCMcV6h4nY08hU6CzlHukHXl3MABZJLI");
+    </script>
+
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>  
+    <script src="/js/alertify.js"></script>
+
+    <script src="/wrs/wrs.ui.js"></script>
+    <script src="/wrs/wrs.core.js"></script>
+
+    <script>
+    var WRS;
+    var USER = "<%- USER ? USER.email : '' %>";
+    $(document).ready(function(){
+      WRS = new _WRS_CORE();
+
+      // Login button
+      $('#wrs-sign-in').click(function(){
+        var user = $('#wrs-email').val();
+        var password = $('#wrs-password').val();
+
+        WRS.login(user, password, function(){
+          $("#login-panel").hide();
+          $("#logout-panel").show();
+        });
+      });
+
+      // Register button
+      $('#wrs-sign-up').click(function(){
+        var user = $('#wrs-email').val();
+        var password = $('#wrs-password').val();
+
+        WRS.register(user, password);
+      });
+
+      // Logout button
+      $('#wrs-logout').click(function(){
+        WRS.logout();
+        $('#logout-panel').hide();
+        $('#login-panel').show();
+      });
+
+    });
+    </script>
+
   </head>
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -42,25 +86,33 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">WebRockStar</a>
+          <a class="navbar-brand" href="#">WebRock<span class="glyphicon glyphicon-star"></span></a>
         </div>
         <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
+          <div id="login-panel" class="navbar-form navbar-right" style="<%= (USER != null ? 'display:none':'') %>">
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input id='wrs-email' type="text" placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input id='wrs-password' type="password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
+            <button id="wrs-sign-in" class="btn btn-success">Sign In</button>
+            or
+            <button id="wrs-sign-up" class="btn btn-info">Sign Up</button>
+          </div>
+
+          <div id="logout-panel" class="navbar-form navbar-right" style="<%= (USER == null ? 'display:none':'') %>">
+            <button id="wrs-logout" class="btn btn-danger">Logout</button>
+          </div>
+        </div>
+        <!--/.navbar-collapse -->
       </div>
     </div>
    
     <div class="container">
       <%- body %>
     </div>
+
 
   </body>
 </html>
