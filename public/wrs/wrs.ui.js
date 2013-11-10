@@ -11,8 +11,13 @@ _WRS_UI.prototype.showInfo = function(msg) {
 	alertify.success(msg);
 };
 
-_WRS_UI.prototype.showProblemModal = function(modalId, problemInfo) {
-	$(modalId).find('.modal-title').text(problemInfo.title + ' (' + problemInfo.difficulty + ')');
-	$(modalId).find('.modal-body').text(problemInfo.desc);
+_WRS_UI.prototype.showProblemModal = function(modalId, problemId, problemObject) {
+	var problemInfo = problemObject.get("problemDetails");
+
+	$(modalId).find('.problem-title').text(problemInfo.name + ' (' + problemInfo.difficulty + ')');
+	$(modalId).find('.problem-desc').text(problemInfo.desc);
+	$(modalId).find('.problem-constrains').text(problemInfo.constraints);
+	$(modalId).find('.problem-examples').text(problemInfo.examples);
+	$(modalId).data('problem-id', problemId);
 	$(modalId).modal('show');
 };	

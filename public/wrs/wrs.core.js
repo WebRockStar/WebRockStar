@@ -123,11 +123,17 @@ _WRS_CORE.prototype.setCookie = function(name, value, expires, path, domain, sec
 };
 
 _WRS_CORE.prototype.showProblem = function(problemId, modalId) {
-	// get problem info
-	problemInfo = {
-		"title": "Login Page",
-		"desc": "WTF",
-		"difficulty": "Hard"
-	};
-	this._ui.showProblemModal(modalId, problemInfo);
+	var Problem = Parse.Object.extend('Problem');
+	var query = new Parse.Query(Problem);
+	var wrs = this;
+	query.get(problemId, {
+		success: function(problemInfo) {
+			console.log(problemInfo);
+			wrs._ui.showProblemModal(modalId, problemId, problemInfo);
+		},
+		error: function(object, error) {
+			console.log(error);
+			wrs._ui.showError("Sorry! No information found about the problem id: " + problemId);
+		}
+	});
 };
