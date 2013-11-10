@@ -12,7 +12,7 @@ exports.login = function(req, res, next) {
 		next();
 	} else {
 
-		res.render('index', {
+		res.render('home', {
 			title : 'Wrong password'
 		});
 
