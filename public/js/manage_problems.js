@@ -22,7 +22,7 @@ var counters = {testCase:0}
 	var that = $(this);
 	console.log(that);
 	var testSet = problemJson.template.testSet[parseInt(that.attr('data-wrs-case')) +1];
-$('.panel-heading h4').text('Test' + that.attr('data-wrs-case'));
+$('.panel-heading h4').text('Test' + (parseInt(that.attr('data-wrs-case'))+1));
 $('.panel-heading').attr('data-wrs-case',that.attr('data-wrs-case')); 
 $('.rowDelete').click();
 testSet.input.forEach(function(val){
@@ -101,13 +101,17 @@ $('.test-case-save').on('click', function(){
 $('#wrs-inp-val div.row').each(function(){
 var x = $(this);
 var tkey = x.find('.wrs-key').val();
-	testSet.input.push({tkey:x.find('.wrs-val').val()})
+	var t = JSON.parse('{"'+tkey+'":"'+x.find('.wrs-val').val()+'"}')
+//	var t = JSON.parse("{"+tkey+":"+x.find('.wrs-val').val()+"}")
+	testSet.input.push(t)
 	});
 	
 $('#wrs-out-val div.row').each(function(){
 var x = $(this);
 var tkey = x.find('.wrs-key').val();
-	testSet.output.push({tkey:x.find('.wrs-val').val()})
+	var t = JSON.parse('{"'+tkey+'":"'+x.find('.wrs-val').val()+'"}')
+	//var t = JSON.parse("{'"+tkey+"':'"+x.find('.wrs-val').val()+"'}")	
+	testSet.output.push(t);
 	});
 
 testSet.targetUrl = $('#target-url').val();
