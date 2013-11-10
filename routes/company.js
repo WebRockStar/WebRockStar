@@ -17,6 +17,9 @@ exports.auth = function(req, res, next) {
 			next();	
 		});
 	}
+	else {
+		next();	
+	}
 };
 
 exports.problems = function(req, res){
