@@ -23,10 +23,10 @@ var server_name = process.argv[2], //provides which server it is listening to
 
 
 //the below set will come from mongodb
-var testSet = [{'tcid':'123','#username':'<asd',
-'#password':'password',
-'output': 'false',
-'weight':10,
+var testSet = [
+{'input':[{'#username':'<asd'},{'#password':'password'}],
+'output': [{'#msg':'test'},{'#op':'some message'}],
+'weight':1,
 'testUrl' : '/',
 }];
 //start the APP
@@ -38,33 +38,30 @@ var app = require('/tmp/'+answerId+'/app.js');
 //fetch the testcases for the application
 console.log('will call'+server_name+':'+server_port);
 var testStatus = new Array();
-testSet.forEach(function(v,i){
+testSet.forEach(function(ts,i){
 
-client.url('http://'+server_name+":"+server_port+ v.testUrl)
-	var weight =  v.weight;
-	var expRes = v.output;
-	var tcid = v.tcid;
+client.url('http://'+server_name+":"+server_port+ ts.testUrl)
+	//var tcid = v.tcid;
 	try{
-	delete v.tcid;
-	delete v.weight;
-	delete v.output;
-	delete v.testUrl;
-	for(var x in v){
-		client.setValue(x,v[x]);
-	}
+		ts.input.forEach(function(v){
+			for(var x in v){
+				client.setValue(x,v[x]);
+			}
+		});
 	client.submitForm('form',function(){
-	client.getText('#output',function(err,val){
-	if(val == expRes){
-		//give marks according to the weightage.. :)
-		console.log('giving expected result');
-		testStatus.push({'tcid':tcid,'result':weight})
-	}else{
-		testStatus.push({'tcid':tcid,'result':'WA'});
-		console.log('giving unexpected result');
-	}
+		ts.output.forEach(function(j){
+			for(var y in j){
+				client.getText(y,function(err,val){
+					if(val != j[y]){
+						testStatus.push({tcid:'','status':'Failed'});
+					}
+				});
+
+			}
+		})
 	});
-});}catch (e){
-	testStatus.push({'tcid':tcid,'result':'Runtime Error..:\'('})
+}catch (e){
+	testStatus.push({'tcid':tcid,'status':'Runtime Error..:\'('})
 	process.exit(1);
 	}
 });

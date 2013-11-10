@@ -5,6 +5,19 @@
 	  examples: ''
 	  },template:{fileStruct:[],testSet:[]}};
 
+//action to add file
+//action to view file
+//action to add folder
+var currParr = '/';
+$('.filestruct-panel').closest('.col-md-9').hide();
+var fileStruct = problemJson.template.fileStruct;
+$('#wrs-tab-question').on('click','.glyphicon-plus',function(){
+	currParr = $(this).siblings('span.glyphicon-folder-open');
+	//set the current folder 
+	$('#wrs-tab-question .panel-heading >h4').text()
+	$('.filestruct-panel').closest('.col-md-9').show();
+});
+
 
   //<li><a href="#"><span class="glyphicon glyphicon-file">TestCase00</span></a></li>
 var testCases = $('#test-case-list')[0];
@@ -47,7 +60,7 @@ $('#target-url').val(testSet.targetUrl);
 	 }); 
   function addRow(section, initRow) {
     var newRow = initRow.clone().removeAttr('id').addClass('new').insertBefore(initRow),
-        deleteRow = $('<a class="rowDelete"><img src="images/delete.png"></a>');
+        deleteRow = $('<a class="rowDelete"><span class="glyphicon glyphicon-trash" > </span></a>');
 	initRow.find('input[type="text"]').val('');
   deleteRow.on('click',function(){
 	  $(this).closest('div.row.new').remove();
@@ -116,4 +129,8 @@ var tkey = x.find('.wrs-key').val();
 
 testSet.targetUrl = $('#target-url').val();
 console.log(testSet);
+//save problem data
+
+problemJson.problemDetails.name = $('wrs-file-problem')
+problemJson.problemDetails.desc = $('wrs-file-problem-statement')
 });

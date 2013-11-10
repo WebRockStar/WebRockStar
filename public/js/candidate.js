@@ -40,7 +40,7 @@ $('button.test-btn').on('click', function(e) {
 	savebtns.click();
 	var verifyTestCases = function(testId){
 	$.ajax({
-		url:'.',
+		url:'candidate?id=test&ansId='+testId,
 		type: 'GET',
 //		data{
 //			ansId : testId
@@ -53,7 +53,7 @@ $('button.test-btn').on('click', function(e) {
 		});	
 	};
 	$.ajax({
-		url:'.',
+		url:'',
 		type:'POST',
 		data: {
 			test: '1',
@@ -92,7 +92,7 @@ $('.sql-toggle-btn').on('click',function(e){
 $('.sql-editor .play-button').on('click', function(e){
 	//take the query run the query and show the output.
 	$.ajax({
-		url:'/test/mysql',
+		url:'/candidate/mysql',
 		type:'POST',
 		data:{
 			'query':wrsCE.getValue(),
