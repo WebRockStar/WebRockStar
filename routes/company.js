@@ -20,5 +20,13 @@ exports.auth = function(req, res, next) {
 };
 
 exports.problems = function(req, res){
-	res.render('manage_problems', {COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
+	res.render('company_problems', {PAGE: 'company_problems', COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
+};	
+
+exports.invites = function(req, res){
+	res.render('company_invites', {PAGE: 'company_invites', COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
+};	
+
+exports.analytics = function(req, res){
+	res.render('company_analytics', {PAGE: 'company_analytics', COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
 };	

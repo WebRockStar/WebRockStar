@@ -87,14 +87,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">&lt;Web&gt;RockStar</a>
+          <a class="navbar-brand" href="/">&lt;Web&gt;RockStar</a>
         </div>
 
         <div class="navbar-collapse collapse">
  
            <ul id="company-panel" class="nav navbar-nav" style="<%= (COMPANY_USER == null ? 'display:none':'') %>">
-            <li class="active"><a href="/company/problems"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;Manage Problems</a></li>
-            <li><a href="/company/analytics"><span class="glyphicon glyphicon-signal"></span>&nbsp;Analytics</a></li>
+            <li <%- (PAGE == 'company_problems' ? 'class="active"' : '') %>><a href="/company/problems"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;Manage Problems</a></li>
+            <li <%- (PAGE == 'company_invites' ? 'class="active"' : '') %>><a href="/company/invites"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Send Invites</a></li>
+            <li <%- (PAGE == 'company_analytics' ? 'class="active"' : '') %>><a href="/company/analytics"><span class="glyphicon glyphicon-signal"></span>&nbsp;Analyze Results</a></li>
            </ul>
 
           <div id="login-panel" class="navbar-form navbar-right" style="<%= (COMPANY_USER != null ? 'display:none':'') %>">
