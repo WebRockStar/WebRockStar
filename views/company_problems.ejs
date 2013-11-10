@@ -23,19 +23,6 @@
               <div class="tree">
                 <ul>
                   <li><a href="#" class="active"><span class="glyphicon glyphicon-folder-open">/</span></a><a clas="btn btn-xs btn-danger"><span class="glyphicon glyphicon-plus"></span></a></li>
-                  <ul>
-                    <li>
-                      <a href="#"><span class="glyphicon glyphicon-file">index.js</span></a>
-                    </li>
-                    <li>
-                      <a href="#"><span class="glyphicon glyphicon-folder-open">views</span><a clas="btn btn-xs btn-danger"><span class="glyphicon glyphicon-plus"></span></a></a>
-                      <ul>
-                        <a href="#"><li><span class="glyphicon glyphicon-file">index.ejs</span></a></li>
-                        <a href="#"><li><span class="glyphicon glyphicon-file">app.ejs</span></a></li>
-                        <a href="#"><li><span class="glyphicon glyphicon-file">web.ejs</span></a></li>
-                      </ul>
-                    </li>
-                  </ul>
                 </ul>
               </div> <!-- tree -->
             </div> <!-- row -->
@@ -44,7 +31,7 @@
             <div class="wrs-left-border">
               <div class="panel panel-default filestruct-panel">
                 <div class="panel-heading">
-                  <h4>/</h4>
+                  <h4 id='current-obj' data-current-obj-id='0'>/</h4>
                   <span class="wrs-pull-right">
                     <button class="btn btn-danger">Delete</button>
                   </span>
@@ -81,7 +68,7 @@
                     <div class="checkbox">
                        <label><input id="wrs-file-editable" type="checkbox" checked> Editable</label>
                     </div>
-                    <button type="submit" class="btn btn-primary filestruct-save">Save</button>
+                    <button type="button" class="btn btn-primary filestruct-save">Save</button>
                     <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
                   </form>
                 </div> <!-- panel-body -->
