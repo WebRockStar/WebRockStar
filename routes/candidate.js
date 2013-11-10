@@ -158,6 +158,7 @@ exports.testfunc = function(req, res, next) {
 };
 
 exports.mysql = function(req,res,next){
+	//conosole.log("got request for"+req.body.user+req.body.password);
 var tempConnection = mysql.createConnection({
 	host: 'localhost',
 	user : req.body.user,
@@ -166,7 +167,7 @@ var tempConnection = mysql.createConnection({
 
 tempConnection.connect();
 tempConnection.query(req.body.query,function(err,rows,fields){
-res.send(JSON.stringify({ERR:err,ROWS:rows}));
+res.send({ERR:err,ROWS:rows});
 	//run the query and send the details to the application	
 });
 }

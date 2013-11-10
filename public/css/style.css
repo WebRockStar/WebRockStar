@@ -43,6 +43,7 @@ body {
 	display: none;
 	-webkit-transition: display 1.5s ;
 	background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 10%, #fcfcfc 15%);
+	overflow: auto;
 }
 .show-editor {
 	display: block;

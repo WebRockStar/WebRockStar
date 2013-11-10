@@ -101,6 +101,29 @@ $('.sql-editor .play-button').on('click', function(e){
 			},
 		success: function(data){
 			//show the data in json format, and they can utilize that details.
+			if(data.ERR){
+				$('#wrs-sqldata').text(data.ERR);
+				return;
+			}
+			//take out keys for theads 
+			//run query in the array to generate the table;
+			var tableData = '<table class="table table-bordered"><thead><tr>';
+			var ks = Object.keys(data.ROWS[0]);
+			console.log(ks);
+			ks.forEach(function(val){
+				tableData += "<th>"+val+"</th>"
+				})
+			tableData +="</tr></thead><tbody>";
+			data.ROWS.forEach(function(val){
+				tableData += "<tr>";
+				ks.forEach(function(v){
+					tableData += "<td>"+val[v]+"</td>";
+					})
+				tableData += "</tr>";
+			});
+			tableData+='</tbody></table>';
+			$('#wrs-sqldata').html(tableData);
+
 		}
 		});
 	});
