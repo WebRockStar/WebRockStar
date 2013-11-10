@@ -4,20 +4,39 @@
   
 	<div class="row panel">
     <div class="panel-body">
-      <div class="form-group">
+    <div class="row">
+      <div class="form-group col-md-6">
         <label for="wrs-file-problem">Problem</label>
         <input id="wrs-file-problem" type="text" class="form-control" placeholder="Problem Title"></input>
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="wrs-file-problem-statement">Problem description</label>
         <textarea id="srs-file-problem-statement" class="form-control" rows="3" placeholder="Problem description"></textarea>
       </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="wrs-file-problem-constraints">Problem constraints</label>
+        <textarea id="srs-file-problem-constraints" class="form-control" rows="3" placeholder="Problem constraints"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="wrs-file-problem-example">Problem example</label>
+        <textarea id="srs-file-problem-example" class="form-control" rows="3" placeholder="Problem examples"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2 col-md-offset-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
+      </div>
+    </div>
+      <hr>
       <ul class="nav nav-tabs">
         <li><a href="#wrs-tab-question" data-toggle="tab">Question</a></li>
         <li><a href="#wrs-tab-testcase" data-toggle="tab">Test Case</a></li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane" id="wrs-tab-question">
+        <div class="tab-pane active" id="wrs-tab-question">
           <div class="col-md-3">
             <div class="row">
               <div class="tree">
@@ -81,15 +100,15 @@
                     <div class="checkbox">
                        <label><input id="wrs-file-editable" type="checkbox" checked> Editable</label>
                     </div>
-                    <button type="submit" class="btn btn-primary filestruct-save">Save</button>
-                    <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
+                    <button type="submit" class="btn btn-default filestruct-save">Save</button>
+                    <button type="cancel" class="btn btn-default">Cancel</button>
                   </form>
                 </div> <!-- panel-body -->
               </div> <!-- panel -->
             </div> <!-- wrs-left-border -->
           </div><!-- col-md-9 -->
         </div> <!-- wrs-tab-question -->
-        <div class="tab-pane active" id="wrs-tab-testcase">
+        <div class="tab-pane" id="wrs-tab-testcase">
           <div class="col-md-3">
             <div class="row">
               <div class="tree">
@@ -143,8 +162,8 @@
                         <input type="text" class="form-control" id="target-url" placeholder="target url">
                       </div>
                     </div>
-		     <button type="button" class="btn btn-primary test-case-save">Save</button>
-		      <button type="cancel" class="btn btn-default btn-danger">Cancel</button>
+		     <button type="button" class="btn btn-default test-case-save">Save</button>
+		      <button type="cancel" class="btn btn-default">Cancel</button>
                   </form>
                 </div> <!-- panel-body -->
               </div> <!-- panel -->
