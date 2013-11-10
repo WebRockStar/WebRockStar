@@ -153,6 +153,11 @@ _WRS_CORE.prototype.sendInvite = function(email, complex, problemId, problemName
  	var invite = new Invite();
  	invite.save(inviteObj, {
  		success: function(obj) {
+ 			console.log(obj);
+ 			$.get('/ajax/sendinvite?inviteId='+obj.id,function(){
+ 				
+
+ 			});
  			wrs._ui.showInfo("Invitation to "+email+" successfully sent!");
  			location.reload();
  		},

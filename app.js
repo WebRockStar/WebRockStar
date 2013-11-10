@@ -44,7 +44,7 @@ app.get('/', company.auth, home.index);
 app.get('/company/problems', company.auth, company.problems);
 app.get('/company/invites', company.auth, company.invites);
 app.get('/company/analytics', company.auth, company.analytics);
-
+app.get('/ajax/sendinvite', company.sendInviteMail);
 
 app.get('/login', candidate.login);
 app.post('/candidate/mysql',candidate.mysql);

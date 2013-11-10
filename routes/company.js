@@ -1,4 +1,5 @@
 var ParseREST = require('../lib/parse');
+var email = require('../lib/email');
 
 // authentication middleware
 exports.auth = function(req, res, next) {
@@ -32,8 +33,32 @@ exports.problems = function(req, res){
 	res.render('company_problems', {PAGE: 'company_problems', COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
 };	
 
-exports.invites = function(req, res){
+exports.sendInviteMail = function(req, res) {
+	var inviteId = req.param('inviteId');
+	var parse = ParseREST.connect();
+	console.log(inviteId);
+	parse.getObject('Invite', inviteId, function(error, response, body, success) {
+		console.log(error);
+		console.log(body);
+		var mailOptions = {
+		    from: "WebRockStar <admin@arkene.com>", 
+		    to: body.email, 
+		    subject: "WebRockStar: Invitation for a challenge!", 
+		    html: "Howdy, <br/>You have been invited to take a web developer programming challenge on the WebRockStar platform. To proceed, simply click <a href='http://ec2-54-251-31-4.ap-southeast-1.compute.amazonaws.com:3000/candidate?id=" + inviteId + "'>here</a>.<br/>Regards,<br/>WebRockStar"
+		}
 
+		email.transport.sendMail(mailOptions, function(error, response){
+		    if(error){
+		        console.log(error);
+		    }else{
+		        console.log("Message sent: " + response.message);
+		        return "ok";
+		    }
+		});
+	});
+};
+
+exports.invites = function(req, res){
 	var parse = ParseREST.connect();
 	parse.getObjects('Problem', function(error, response, problems, success) {
 		var EASY_PROBLEMS=[], MODERATE_PROBLEMS=[], HARD_PROBLEMS=[];
@@ -44,6 +69,9 @@ exports.invites = function(req, res){
 		console.log(problems);
 
 		for(var i=0; i<problems.length; i++){
+			if(!problems[i].hasOwnProperty('problemDetails')) {
+				continue;
+			}
 			if(problems[i].problemDetails.difficulty == 'HARD') {
 				HARD_PROBLEMS.push({id:problems[i].objectId, name:problems[i].problemDetails.name});
 			}
