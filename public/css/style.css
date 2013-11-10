@@ -80,12 +80,19 @@ body {
 
 
 body section {
-text-align: center;
-padding: 100px 0;
-border-bottom: 1px solid #eee;
+  text-align: center;
+  padding: 100px 0;
+  border-bottom: 1px solid #eee;
 }
 
 body section#web .col img {
-margin: 20px;
-width: 100px;
+  margin: 20px;
+  width: 100px;
+}
+
+.wrs-landing-icon {
+  font-size: 64px;
+  color: rgba(0,160,140,0.8);
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
