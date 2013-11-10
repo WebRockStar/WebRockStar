@@ -7,8 +7,14 @@ exports.auth = function(req, res, next) {
 		var info = JSON.parse(req.cookies.WebRockStar);
 		var parse = ParseREST.connect(info.token);
 		parse.getCurrentUser(function(error, response, user, success){
+			if(error) {
+				console.log(error);
+				next();
+				return;
+			}
 			console.log(info);
-			if(info.id != user.objectId || info.email != user.email) {
+			console.log(user);
+			if(user && (info.id != user.objectId || info.email != user.email)) {
 				console.log("Invalid cookie data! Unsetting user...");
 				console.log(user);
 				user = null;
@@ -27,7 +33,41 @@ exports.problems = function(req, res){
 };	
 
 exports.invites = function(req, res){
-	res.render('company_invites', {PAGE: 'company_invites', COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
+	var invites = [{
+		id: '123',
+		email: 'i.abhi27@gmail.com',
+		problemId: '94854',
+		problemName: 'Login Page',
+		problemDifficultyLevel: '3',
+		status: 'ATTEMPTED',
+		sentOn: '2013-10-13 4:58 PM GMT',
+		validTill: '2013-10-13 5:58 PM GMT',
+		duration: '59.65'
+	},
+	{
+id: '123',
+		email: 'i.abhi27@gmail.com',
+		problemId: '94854',
+		problemName: 'Login Page',
+		problemDifficultyLevel: '3',
+		status: 'PENDING',
+		sentOn: '2013-10-13 4:58 PM GMT',
+		validTill: '2013-10-13 5:58 PM GMT',
+		duration: '59.65'
+	},
+	{
+id: '123',
+		email: 'i.abhi27@gmail.com',
+		problemId: '94854',
+		problemName: 'Login Page',
+		problemDifficultyLevel: '3',
+		status: 'EXPIRED',
+		sentOn: '2013-10-13 4:58 PM GMT',
+		validTill: '2013-10-13 5:58 PM GMT',
+		duration: '59.65'
+	}];
+
+	res.render('company_invites', {PAGE: 'company_invites', INVITES: invites, COMPANY_USER: req.WRSUser ? req.WRSUser.email : null});
 };	
 
 exports.analytics = function(req, res){
