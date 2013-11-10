@@ -1,6 +1,6 @@
 //var cwd = process.cwd();
 //process.chdir(__dirname);
-//var MongoClient = require('mongodb').MongoClient;
+var MongoClient = require(__dirname + '/node_modules/mongodb').MongoClient;
 var client = require('webdriverjs').remote({
   desiredCapabilities:{
     cssSelectorsEnabled: true,
@@ -23,7 +23,7 @@ var server_name = process.argv[2], //provides which server it is listening to
 
 
 //the below set will come from mongodb
-var testSet = [{'#username':'<asd',
+var testSet = [{'tcid':'123','#username':'<asd',
 '#password':'password',
 'output': 'false',
 'weight':10,
@@ -39,27 +39,35 @@ var app = require('/tmp/'+answerId+'/app.js');
 console.log('will call'+server_name+':'+server_port);
 var testStatus = new Array();
 testSet.forEach(function(v,i){
+
 client.url('http://'+server_name+":"+server_port+ v.testUrl)
-var weight =  v.weight;
-var expRes = v.output;
-delete v.weight;
-delete v.output;
-delete v.testUrl;
+	var weight =  v.weight;
+	var expRes = v.output;
+	var tcid = v.tcid;
+	try{
+	delete v.tcid;
+	delete v.weight;
+	delete v.output;
+	delete v.testUrl;
 	for(var x in v){
 		client.setValue(x,v[x]);
 	}
-client.submitForm('form',function(){
-client.getText('#output',function(err,val){
-console.log(arguments);
-console.log(val);
-if(val == expRes){
-//give marks according to the weightage.. :)
-console.log('giving expected result');
+	client.submitForm('form',function(){
+	client.getText('#output',function(err,val){
+	if(val == expRes){
+		//give marks according to the weightage.. :)
+		console.log('giving expected result');
+		testStatus.push({'tcid':tcid,'result':weight})
+	}else{
+		testStatus.push({'tcid':tcid,'result':'WA'});
+		console.log('giving unexpected result');
+	}
+	});
+});}catch (e){
+	testStatus.push({'tcid':tcid,'result':'Runtime Error..:\'('})
+	process.exit(1);
+	}
+});
+//save data
+//need to store answer as AnswerID
 process.exit(0);
-}else{
-process.exit(1);
-console.log('giving unexpected result');
-}
-});
-});
-});

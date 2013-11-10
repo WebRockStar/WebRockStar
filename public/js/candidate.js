@@ -39,7 +39,18 @@ $('button.test-btn').on('click', function(e) {
 	//get the data and send it to the backend
 	savebtns.click();
 	var verifyTestCases = function(testId){
-		
+	$.ajax({
+		action:'.',
+		type: 'GET',
+		data{
+			'ansId':d
+		},
+		success: function(resData){
+			console.log("Some result data",resData);
+		},error: function(err){
+			console.log('Some Error..');
+		}
+		});	
 	};
 	$.ajax({
 		action:'.',
@@ -49,9 +60,23 @@ $('button.test-btn').on('click', function(e) {
 			flist: $('#fileList').html()
 			},
 		success: function(d){
-			console.log(d);
+			verifyTestCases(d);
 			//send another request to check if the code is tested;
 			// verify if the code is tested				
 		}
 	});
 });
+$('button.submit-btn').on('click',function(e){
+	savebtns.click();
+	$.ajax({
+		action:'.',
+		type: 'POST',
+		data: {
+			test:'2',
+			flist: $('#fileList')
+		},
+		success: function(d){
+			//Send a confirmation message on his registered no.
+			}
+		});
+	});

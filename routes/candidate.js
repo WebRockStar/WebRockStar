@@ -65,6 +65,11 @@ var template = [{
 exports.test = function(req, res) {
 	// check if the user is loggedin
 	console.log(req.query.id);
+	if(req.query.ansId){
+		//get the details:
+		//send the whole details related to all the small testcases
+		res.render('testing',{success:});
+	}
 	res.render('problem', {
 		probDesc : problemDescription,
 		fileList : template
@@ -123,8 +128,10 @@ exports.testfunc = function(req, res, next) {
 	console.log('./getLocalPort.py '+tmpId+" "+req.query.id + " "+req.body.test);
 	exec('./getLocalPort.py '+tmpId+" "+req.query.id + " "+req.body.test,function (error, stdout, stderr) {
 		/** comment this because testing is taken care by answer Id and results will be updated by the same. **/
-//		if(!!error || stderr){
-			console.log("ERROT::",error);
+		if(!!error || stderr){
+			//verify if it is not already saved in the db and then save
+
+			console.log("ERROR::",error);
 			console.log("STDOUT::",stdout);
 			console.log("STDERR::",stderr);
 			//update the result in db as there wull be one script which will be checking 
