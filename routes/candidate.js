@@ -13,7 +13,6 @@ exports.login = function(req, res, next) {
 	} else {
 
 		res.render('index', {
-			USER: null,
 			title : 'Wrong password'
 		});
 

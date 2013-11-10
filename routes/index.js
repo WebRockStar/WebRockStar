@@ -14,12 +14,12 @@ exports.index = function(req, res){
 				console.log(user);
 				user = null;
 			}
-			res.render('index', {USER: user, DOMAIN: "localhost:3000"});
+			res.render('index', {});
 		});
 
-	}
+	}	
 	else {
-		res.render('index', {USER: null, DOMAIN: "localhost:3000"});
+		res.render('index', {});
 	}
 
-};
+};	
