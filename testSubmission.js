@@ -40,12 +40,12 @@ var app = require('/tmp/'+answerId+'/app.js');
 //fetch the testcases for the application
 console.log('will call'+server_name+':'+server_port);
 
-parse.getObject("Problem",questionId,function(err,res,body,success){
+
 	var resultJSON = {
 		answerId : answerId,
-		problemDifficultyLevel: body.problemDifficultyLevel,
+		problemDifficultyLevel: 'HARD',
 		problemId:questionId,
-		problemName:body.problemName,
+		problemName:'Authentication',
 		userEmail:'i.abhi27@gmail.com'};
 
 	var testStatus = new Array();
@@ -85,4 +85,3 @@ parse.getObject("Problem",questionId,function(err,res,body,success){
 	//need to store answer as AnswerID
 	//process.exit(0);
 
-});
