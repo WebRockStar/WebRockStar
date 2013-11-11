@@ -10,7 +10,7 @@ connection.connect();
 exports.login = function(req, res, next) {
 
 	var parse = ParseREST.connect();
-	parse.getObject('Invite', inviteId, function(error, response, body, success) {
+	parse.getObject('Invite', req.query.id, function(error, response, body, success) {
 		var problemId = body.problemId;
 		parse.getObject('Problem', problemId, function(error, response, body, success) {
 				req.problemBody = body;
@@ -67,6 +67,7 @@ var template = [{
 	contents : '{  "name": "WebRockStar",    "version": "0.0.1",    "private": true,    "scripts": {        "start": "node app.js"    },    "dependencies": {        "express": "3.3.4",        "ejs": "*","ejs-locals": "~1.0.2",	        "mysql": "~2.0.0-alpha9"   }}',
 	editable : 'true'
 }];
+//console.log(req.problemDetails)
 exports.test = function(req, res) {
 	// check if the user is loggedin
 	console.log(req.query.id);
@@ -83,7 +84,7 @@ exports.test = function(req, res) {
 	console.log(req.problemBody);
 	res.render('candidate_problem', {
 		probDesc : req.problemBody.problemDetails,
-		fileList : req.problemBody.template,
+		fileList : req.problemBody.template.fileStruct,
 		credentials : {'user_name':genUser,'user_pass':genPass}
 	});
 

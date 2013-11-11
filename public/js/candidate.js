@@ -40,7 +40,7 @@ $('button.test-btn').on('click', function(e) {
 	savebtns.click();
 	var verifyTestCases = function(testId){
 	$.ajax({
-		url:'candidate?id=test&ansId='+testId,
+		url:'candidate/'+testId,
 		type: 'GET',
 //		data{
 //			ansId : testId

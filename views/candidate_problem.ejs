@@ -4,27 +4,23 @@
   	
   	<div class="panel panel-default" id="wrs-problem-desc">
       <dl class='dl-horizontal'>
-        <dt>Title</dt>
-        <dd>Authentication</dd>
+        <dt>Title</dt> 
+        <dd><%= probDesc.name %></dd>
         <dt>Description</dt>
-        <dd>Implement authentication module</dd>
+        <dd><%= probDesc.desc %></dd>
         <dt>Constraints</dt>
         <dd>
-            <li>Constraints 01</li>
-            <li>Constraints 01</li>
+	<%= probDesc.constraints %>
         </dd>
         <dt>Examples</dt>
-        <dd>
-            <li>Example1</li>
-            <li>Example2</li>
-            <li>Example2</li>
+        <dd><%= probDesc.examples %>
         </dd>
         <dt>SQL Credentials</dt>
         <dd>
             <dt>Login:</dt>
-            <dd>hnuty2fx</dd>
+            <dd id='username'><%= credentials.user_name %></dd>
             <dt>Password:</dt>
-            <dd>hnuty2fx</dd>
+            <dd id='password'><%= credentials.user_pass %></dd>
         </dd>
       </dl>
     </div>

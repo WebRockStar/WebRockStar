@@ -1,6 +1,7 @@
 //var cwd = process.cwd();
 //process.chdir(__dirname);
 var MongoClient = require(__dirname + '/node_modules/mongodb').MongoClient;
+var ParseREST = require(__dirname+'/lib/parse');
 var client = require('webdriverjs').remote({
   desiredCapabilities:{
     cssSelectorsEnabled: true,
@@ -8,6 +9,7 @@ var client = require('webdriverjs').remote({
   }
 });
 client.init();
+var parse = ParseREST.connect();
 
 //get all the test values from mongo db
 //this file will be called by the python script hence we need to accept arguments as server name and port
@@ -15,7 +17,7 @@ client.init();
 //this file will be called by the python script hence we need to accept arguments as server name and port
 
 //it should be called like this nodejs testSubmission.js <server> <port> <ansId> <quesId> <testSet>
-var server_name = process.argv[2], //provides which server it is listening to
+var server_name = '127.0.0.1', //provides which server it is listening to
         server_port = process.argv[3], //provides the info about open port
         answerId = process.argv[4], //provides the info about answer location
         questionId = process.argv[5], //question information
@@ -38,7 +40,7 @@ var app = require('/tmp/'+answerId+'/app.js');
 //fetch the testcases for the application
 console.log('will call'+server_name+':'+server_port);
 var resultJSON = {
-	answerId = answerId,
+	answerId : answerId,
 	problemDifficultyLevel: 'MODERATED',
 	problemId:questionId,
 	problemName:"testData",
@@ -71,10 +73,12 @@ client.url('http://'+server_name+":"+server_port+ ts.testUrl)
 }catch (e){
 	testStatus.push({'tcid':tcid,'status':'Runtime Error..:\'('})
 		resultJSON['testCases'] = testStatus;
-	
-	process.exit(1);
+//	process.exit(1);
 	}
 });
+parse.createObject('Solution',resultJSON,function(err,res,body,success){
+	
+	});	
 //save data
 //need to store answer as AnswerID
-process.exit(0);
+//process.exit(0);
