@@ -39,7 +39,7 @@ app.use(app.router);
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
+app.get('/problem',candidate.login2,candidate.probs);
 app.get('/', company.auth, home.index);
 app.get('/company/problems', company.auth, company.problems);
 app.get('/company/invites', company.auth, company.invites);

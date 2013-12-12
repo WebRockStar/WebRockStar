@@ -82,6 +82,7 @@ $('button.submit-btn').on('click',function(e){
 	});
 $('.sql-toggle-btn').on('click',function(e){
 	$('.sql-editor').toggleClass('show-editor');
+	$('#fileList li').removeClass('active')
 	//get user credentials
 	//change the mode of
 	savebtns.click();

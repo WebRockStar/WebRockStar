@@ -3,8 +3,8 @@ var ParseREST = require('../lib/parse');
 
 var connection = mysql.createConnection( {
 	host: 'localhost',
-	user : process.env.MYSQL_ROOT_USER,
-	password : process.env.MYSQL_ROOT_PASSWORD
+	user : 'root',
+	password : 'WebRockStar!@#'
 });
 connection.connect();
 exports.login = function(req, res, next) {
@@ -17,6 +17,18 @@ exports.login = function(req, res, next) {
 				next();
 		});
 	});
+
+};
+exports.login2 = function(req, res, next) {
+
+	var parse = ParseREST.connect();
+//	parse.getObject('Invite', req.query.id, function(error, response, body, success) {
+//		var problemId = body.problemId;
+		parse.getObject('Problem', req.query.id, function(error, response, body, success) {
+				req.problemBody = body;
+				next();
+		});
+	//});
 
 };
 
@@ -89,6 +101,13 @@ exports.test = function(req, res) {
 	});
 
 };
+exports.probs = function(req,res,next){
+	res.render('probs',{
+		probDesc : req.problemBody.problemDetails,
+		fileList : req.problemBody.template.fileStruct
+
+	})
+}
 
 exports.testfunc = function(req, res, next) {
 	var tmpId = 'wrs-' + Date.now();
