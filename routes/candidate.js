@@ -1,14 +1,15 @@
+//TODO: Change all parse objects to Mongo
+
 var os = require('os'), fs = require('fs'), cheerio = require('cheerio'), exec = require('child_process').exec, mysql = require('mysql');
 var ParseREST = require('../lib/parse');
 
 var connection = mysql.createConnection( {
-	host: 'localhost',
-	user : 'root',
-	password : 'WebRockStar!@#'
+	host: config.mysql.host,
+	user : config.mysql.user,
+	password : config.mysql.password
 });
 connection.connect();
 exports.login = function(req, res, next) {
-
 	var parse = ParseREST.connect();
 	parse.getObject('Invite', req.query.id, function(error, response, body, success) {
 		var problemId = body.problemId;
@@ -17,7 +18,6 @@ exports.login = function(req, res, next) {
 				next();
 		});
 	});
-
 };
 exports.login2 = function(req, res, next) {
 
@@ -106,8 +106,8 @@ exports.probs = function(req,res,next){
 		probDesc : req.problemBody.problemDetails,
 		fileList : req.problemBody.template.fileStruct
 
-	})
-}
+	});
+};
 
 exports.testfunc = function(req, res, next) {
 	var tmpId = 'wrs-' + Date.now();
@@ -181,7 +181,7 @@ exports.testfunc = function(req, res, next) {
 exports.mysql = function(req,res,next){
 	//conosole.log("got request for"+req.body.user+req.body.password);
 var tempConnection = mysql.createConnection({
-	host: 'localhost',
+	host: config.mysql.host,
 	user : req.body.user,
 	password : req.body.password
 });
@@ -191,5 +191,5 @@ tempConnection.query(req.body.query,function(err,rows,fields){
 res.send({ERR:err,ROWS:rows});
 	//run the query and send the details to the application	
 });
-}
+};
 // example.submit

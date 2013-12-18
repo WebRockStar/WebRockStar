@@ -3,6 +3,11 @@
  * Module dependencies.
  */
 
+// load initial configuration
+// Setting global Config Value
+global.config = require('./lib/config');
+
+
 var express = require('express') 
   , engine = require('ejs-locals')
   , home = require('./routes')
@@ -10,6 +15,8 @@ var express = require('express')
   , company = require('./routes/company')
   , http = require('http')
   , path = require('path');
+  
+
 //  , Parse =  require('kaiseki');
 
 //var PARSE_APP_ID = 'J5v0o2xUAaXvxziD26kzLauhmu6oajOKCmnwUMMw'
