@@ -3,3 +3,4 @@
 *.out
 .settings*
 lib/config.js
+lib\config.js
