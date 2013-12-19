@@ -1,6 +1,5 @@
 // Fetch and store the config values in configValues
 var configValues = require('./config');
-
 /**
  * removes all the string values from the JSON passed
  */

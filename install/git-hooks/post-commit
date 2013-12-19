@@ -1,5 +1,6 @@
 #!/bin/sh
 
-#copy config file back to original location
-mv ./config.js ../../lib/config.js
-
+SCRIPT_DIR=$(dirname $0)
+CONFIGFILE="lib/config.js"
+# Copy config.js to temp location
+cp -rf $SCRIPT_DIR/config.js $CONFIGFILE 

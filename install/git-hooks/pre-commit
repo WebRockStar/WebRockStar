@@ -1,12 +1,13 @@
 #!/bin/sh
 
-CONFIGFILE="../../lib/config.js"
+SCRIPT_DIR=$(dirname $0)
+CONFIGFILE="lib/config.js"
 # Copy config.js to temp location
-cp $CONFIGFILE ./config.js
+cp -rf $CONFIGFILE $SCRIPT_DIR/config.js
 
 #update config file
-sed '/^\/\/CIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHER$/,$d' $CONFIGFILE
+sed -i '/^\/\/CIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHER$/,$d' $CONFIGFILE
 echo //CIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHER$'\n' >> $CONFIGFILE
 
 #remove config values
-node removeConfigValues.js >> $CONFIGFILE
+node $SCRIPT_DIR/removeConfigValues.js >> $CONFIGFILE
