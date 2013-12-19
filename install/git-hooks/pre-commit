@@ -9,5 +9,6 @@ cp -rf $CONFIGFILE $SCRIPT_DIR/config.js
 sed -i '/^\/\/CIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHER$/,$d' $CONFIGFILE
 echo //CIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHER$'\n' >> $CONFIGFILE
 
+echo "removing configvalues"
 #remove config values
 node $SCRIPT_DIR/removeConfigValues.js >> $CONFIGFILE
