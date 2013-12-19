@@ -3,4 +3,4 @@
 SCRIPT_DIR=$(dirname $0)
 CONFIGFILE="lib/config.js"
 # Copy config.js to temp location
-cp -rf $SCRIPT_DIR/config.js $CONFIGFILE 
+mv -f $SCRIPT_DIR/config.js $CONFIGFILE 
