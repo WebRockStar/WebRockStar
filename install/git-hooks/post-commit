@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#copy config file back to original location
+mv ./config.js ../../lib/config.js
+

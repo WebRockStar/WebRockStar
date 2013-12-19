@@ -1,0 +1,12 @@
+#!/bin/sh
+
+CONFIGFILE="../../lib/config.js"
+# Copy config.js to temp location
+cp $CONFIGFILE ./config.js
+
+#update config file
+sed '/^\/\/CIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHER$/,$d' $CONFIGFILE
+echo //CIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHERCIPHER$'\n' >> $CONFIGFILE
+
+#remove config values
+node removeConfigValues.js >> $CONFIGFILE
